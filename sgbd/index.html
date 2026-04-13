@@ -1,0 +1,1221 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Fiches de révision techniques — GenAI, LangChain, LangGraph, AWS, Design Thinking">
+      
+      
+      
+      
+        <link rel="prev" href="../design_thinking/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>SGBD - AI Engineer Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sgbd" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href=".." title="AI Engineer Guide" class="md-header__button md-logo" aria-label="AI Engineer Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Engineer Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SGBD
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="deep-purple"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Partager" aria-label="Partager" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../python/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../oop/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  OOP & Génie Logiciel
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../gen_ai/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  GenAI
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../langchain/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  LangChain
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../langgraph/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  LangGraph
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../aws/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  AWS
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../design_thinking/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Design Thinking
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  SGBD
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="AI Engineer Guide" class="md-nav__button md-logo" aria-label="AI Engineer Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    AI Engineer Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OOP & Génie Logiciel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gen_ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GenAI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../langchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LangChain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../langgraph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LangGraph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_thinking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Thinking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SGBD
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SGBD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Sur cette page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sur cette page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-quest-ce-que-uml-et-a-quoi-servent-ses-diagrammes-principaux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Qu'est-ce que UML et à quoi servent ses diagrammes principaux ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-quest-ce-que-la-normalisation-et-pourquoi-normaliser-une-base-de-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Qu'est-ce que la normalisation et pourquoi normaliser une base de données ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-quest-ce-que-la-1nf-2nf-et-3nf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. Qu'est-ce que la 1NF, 2NF et 3NF ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-quest-ce-que-les-proprietes-acid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Qu'est-ce que les propriétés ACID ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-comment-les-index-ameliorent-ils-les-performances" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. Comment les index améliorent-ils les performances ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-quelle-difference-entre-sql-et-nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Quelle différence entre SQL et NoSQL ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Sur cette page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sur cette page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-quest-ce-que-uml-et-a-quoi-servent-ses-diagrammes-principaux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Qu'est-ce que UML et à quoi servent ses diagrammes principaux ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-quest-ce-que-la-normalisation-et-pourquoi-normaliser-une-base-de-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Qu'est-ce que la normalisation et pourquoi normaliser une base de données ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-quest-ce-que-la-1nf-2nf-et-3nf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. Qu'est-ce que la 1NF, 2NF et 3NF ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-quest-ce-que-les-proprietes-acid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Qu'est-ce que les propriétés ACID ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-comment-les-index-ameliorent-ils-les-performances" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. Comment les index améliorent-ils les performances ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-quelle-difference-entre-sql-et-nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Quelle différence entre SQL et NoSQL ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sgbd">SGBD<a class="headerlink" href="#sgbd" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="i-quest-ce-que-uml-et-a-quoi-servent-ses-diagrammes-principaux">I. Qu'est-ce que UML et à quoi servent ses diagrammes principaux ?<a class="headerlink" href="#i-quest-ce-que-uml-et-a-quoi-servent-ses-diagrammes-principaux" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Qu'est-ce que UML et quels sont les diagrammes que vous utilisez le plus concrètement pour modéliser un système logiciel ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p><strong>UML (Unified Modeling Language)</strong> est un langage de modélisation standardisé (ISO) qui permet de représenter visuellement la structure et le comportement d'un système logiciel. Il ne prescrit pas une méthode de développement — c'est un outil de communication entre parties prenantes techniques et non techniques.</p>
+<p>UML distingue deux grandes familles de diagrammes.</p>
+<p><strong>Diagrammes structurels</strong> (ce que le système <em>est</em>) :</p>
+<p><strong>Diagramme de classes</strong> : le plus utilisé en conception objet. Représente les classes, leurs attributs, leurs méthodes, et les relations entre elles. Les relations clés à maîtriser :
+- <strong>Association</strong> : lien entre deux classes (<code>Commande</code> — <code>Client</code>)
+- <strong>Agrégation</strong> : relation "a un" faible — la partie peut exister sans le tout (<code>Equipe</code> ◇— <code>Joueur</code>)
+- <strong>Composition</strong> : relation "a un" forte — la partie n'existe pas sans le tout (<code>Maison</code> ◆— <code>Piece</code>)
+- <strong>Héritage</strong> : relation "est un" (<code>Admin</code> ——▷ <code>Utilisateur</code>)
+- <strong>Dépendance</strong> : utilisation temporaire (<code>Service</code> ---&gt; <code>Logger</code>)</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>+------------------+          +-------------------+
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>|   Utilisateur    |          |     Commande       |
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>|------------------|  1    *  |-------------------|
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>| - id: int        |----------| - id: int          |
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>| - email: str     |          | - date: datetime   |
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>| + login()        |          | - total: float     |
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>+------------------+          | + calculer_total() |
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>         △                    +-------------------+
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>         |                             |  composition
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>+------------------+                  |
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>|     Admin        |         +-------------------+
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>|------------------|         |   LigneCommande    |
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>| + gerer_users()  |         |-------------------|
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>+------------------+         | - quantite: int    |
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                             | - prix_unitaire    |
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>                             +-------------------+
+</span></code></pre></div>
+<p><strong>Diagrammes comportementaux</strong> (ce que le système <em>fait</em>) :</p>
+<p><strong>Diagramme de séquence</strong> : montre les interactions entre objets dans le temps, message par message. Indispensable pour documenter les flux d'une API ou d'un cas d'usage complexe.</p>
+<p><strong>Diagramme de cas d'utilisation (Use Case)</strong> : représente les acteurs (utilisateurs, systèmes externes) et les fonctionnalités qu'ils peuvent déclencher. Utilisé en phase d'analyse pour aligner les équipes sur le périmètre fonctionnel.</p>
+<p><strong>Diagramme d'activité</strong> : équivalent UML d'un flowchart, utile pour modéliser les processus métier ou les algorithmes complexes.</p>
+<hr />
+<h2 id="ii-quest-ce-que-la-normalisation-et-pourquoi-normaliser-une-base-de-donnees">II. Qu'est-ce que la normalisation et pourquoi normaliser une base de données ?<a class="headerlink" href="#ii-quest-ce-que-la-normalisation-et-pourquoi-normaliser-une-base-de-donnees" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Pourquoi normalise-t-on une base de données relationnelle ? Quels problèmes cherche-t-on à éviter ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>La <strong>normalisation</strong> est un processus de structuration des tables d'une base de données relationnelle pour éliminer la redondance des données et prévenir les anomalies de mise à jour.</p>
+<p><strong>Les trois anomalies qu'on cherche à éviter</strong> :</p>
+<p><strong>Anomalie d'insertion</strong> : on ne peut pas insérer une donnée sans en insérer une autre qui n'existe pas encore. Exemple : on ne peut pas enregistrer un cours sans avoir d'étudiant inscrit si le cours et l'étudiant sont dans la même table.</p>
+<p><strong>Anomalie de modification</strong> : une information stockée en plusieurs endroits oblige à la modifier partout — oublier un endroit crée une incohérence silencieuse.</p>
+<p><strong>Anomalie de suppression</strong> : supprimer une ligne efface accidentellement des informations qu'on voulait conserver. Exemple : supprimer le dernier étudiant d'un cours efface l'information sur le cours lui-même.</p>
+<p><strong>Le principe</strong> : chaque fait doit être stocké une seule fois, à un seul endroit, dans la table qui lui correspond sémantiquement.</p>
+<hr />
+<h2 id="iii-quest-ce-que-la-1nf-2nf-et-3nf">III. Qu'est-ce que la 1NF, 2NF et 3NF ?<a class="headerlink" href="#iii-quest-ce-que-la-1nf-2nf-et-3nf" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Expliquez les trois premières formes normales avec un exemple concret de table non normalisée et les étapes pour l'amener en 3NF."</p>
+<p><strong>Réponse</strong> :</p>
+<p><strong>Table de départ — non normalisée</strong> :</p>
+<table>
+<thead>
+<tr>
+<th>commande_id</th>
+<th>client_nom</th>
+<th>client_ville</th>
+<th>produits</th>
+<th>categories</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Dupont</td>
+<td>Paris</td>
+<td>Livre, Stylo</td>
+<td>Papeterie, Papeterie</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Martin</td>
+<td>Lyon</td>
+<td>Ordinateur</td>
+<td>Informatique</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1NF — Première Forme Normale</strong> : chaque cellule contient une valeur atomique (indivisible). Pas de listes, pas de groupes répétitifs dans une colonne. Chaque ligne est identifiable par une clé primaire.</p>
+<p>Violation : la colonne <code>produits</code> contient "Livre, Stylo" — valeur non atomique.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Après 1NF :
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>| commande_id | client_nom | client_ville | produit    | categorie   |
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>|-------------|------------|--------------|------------|-------------|
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>| 1           | Dupont     | Paris        | Livre      | Papeterie   |
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>| 1           | Dupont     | Paris        | Stylo      | Papeterie   |
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>| 2           | Martin     | Lyon         | Ordinateur | Informatique|
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Clé primaire composée : (commande_id, produit)
+</span></code></pre></div>
+<p><strong>2NF — Deuxième Forme Normale</strong> : être en 1NF + tous les attributs non-clés dépendent de <strong>toute</strong> la clé primaire (pas d'une partie seulement). Élimine les dépendances partielles.</p>
+<p>Violation : <code>client_nom</code> et <code>client_ville</code> dépendent uniquement de <code>commande_id</code>, pas du couple <code>(commande_id, produit)</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Après 2NF — on sépare en deux tables :
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Table Commandes :          Table LignesCommande :
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>| commande_id | client_nom | client_ville |    | commande_id | produit    | categorie    |
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>|-------------|------------|--------------|    |-------------|------------|--------------|
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>| 1           | Dupont     | Paris        |    | 1           | Livre      | Papeterie    |
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>| 2           | Martin     | Lyon         |    | 1           | Stylo      | Papeterie    |
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>                                              | 2           | Ordinateur | Informatique |
+</span></code></pre></div>
+<p><strong>3NF — Troisième Forme Normale</strong> : être en 2NF + aucun attribut non-clé ne dépend d'un autre attribut non-clé (pas de dépendance transitive).</p>
+<p>Violation : <code>categorie</code> dépend de <code>produit</code>, pas directement de la clé <code>(commande_id, produit)</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Après 3NF — on isole les dépendances transitives :
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Table LignesCommande :     Table Produits :
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>| commande_id | produit_id |    | produit_id | nom         | categorie    |
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>|-------------|------------|    |------------|-------------|--------------|
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>| 1           | 101        |    | 101        | Livre       | Papeterie    |
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>| 1           | 102        |    | 102        | Stylo       | Papeterie    |
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>| 2           | 103        |    | 103        | Ordinateur  | Informatique |
+</span></code></pre></div>
+<p><strong>BCNF (Boyce-Codd)</strong> : forme plus stricte que la 3NF — toute dépendance fonctionnelle doit avoir une super-clé en déterminant. Utile quand plusieurs clés candidates se chevauchent.</p>
+<hr />
+<h2 id="iv-quest-ce-que-les-proprietes-acid">IV. Qu'est-ce que les propriétés ACID ?<a class="headerlink" href="#iv-quest-ce-que-les-proprietes-acid" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Qu'est-ce que les propriétés ACID d'une transaction ? Donnez un exemple concret qui illustre pourquoi chaque propriété est indispensable."</p>
+<p><strong>Réponse</strong> :</p>
+<p><strong>ACID</strong> est l'ensemble des propriétés qui garantissent la fiabilité des transactions dans un SGBD relationnel. Une transaction est une séquence d'opérations traitée comme une unité indivisible.</p>
+<p><strong>A — Atomicité</strong> : une transaction est tout ou rien. Si une étape échoue, toutes les opérations précédentes de la transaction sont annulées (rollback). Exemple : un virement bancaire décrédite le compte A et crédite le compte B. Si le crédit échoue après le débit, l'atomicité garantit que le débit est annulé — l'argent ne disparaît pas.</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">BEGIN</span><span class="p">;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">comptes</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">solde</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">solde</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">  </span><span class="c1">-- débit</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">comptes</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">solde</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">solde</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">  </span><span class="c1">-- crédit</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">COMMIT</span><span class="p">;</span><span class="w">  </span><span class="c1">-- les deux ou aucun</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1">-- Si erreur entre les deux : ROLLBACK automatique</span>
+</span></code></pre></div>
+<p><strong>C — Cohérence</strong> : une transaction fait passer la base d'un état valide à un autre état valide. Toutes les contraintes d'intégrité (clés étrangères, contraintes CHECK, unicité) doivent être respectées avant et après la transaction. Si une contrainte est violée, la transaction est annulée.</p>
+<p><strong>I — Isolation</strong> : les transactions concurrentes s'exécutent comme si elles étaient séquentielles. Une transaction en cours ne voit pas les modifications non encore commitées par une autre transaction. Les niveaux d'isolation (du plus permissif au plus strict) :</p>
+<table>
+<thead>
+<tr>
+<th>Niveau</th>
+<th>Dirty Read</th>
+<th>Non-Repeatable Read</th>
+<th>Phantom Read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read Uncommitted</td>
+<td>Possible</td>
+<td>Possible</td>
+<td>Possible</td>
+</tr>
+<tr>
+<td>Read Committed</td>
+<td>Impossible</td>
+<td>Possible</td>
+<td>Possible</td>
+</tr>
+<tr>
+<td>Repeatable Read</td>
+<td>Impossible</td>
+<td>Impossible</td>
+<td>Possible</td>
+</tr>
+<tr>
+<td>Serializable</td>
+<td>Impossible</td>
+<td>Impossible</td>
+<td>Impossible</td>
+</tr>
+</tbody>
+</table>
+<p>En production, PostgreSQL utilise <strong>Read Committed</strong> par défaut — bon équilibre entre cohérence et performance.</p>
+<p><strong>D — Durabilité</strong> : une fois qu'une transaction est commitée, ses modifications sont permanentes même en cas de crash système. Garanti par le <strong>WAL (Write-Ahead Log)</strong> : chaque modification est d'abord écrite dans un journal persistant avant d'être appliquée aux données. En cas de crash, le SGBD rejoue le WAL pour retrouver l'état cohérent.</p>
+<hr />
+<h2 id="v-comment-les-index-ameliorent-ils-les-performances">V. Comment les index améliorent-ils les performances ?<a class="headerlink" href="#v-comment-les-index-ameliorent-ils-les-performances" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Qu'est-ce qu'un index en base de données, comment fonctionne-t-il internement, et quand ne faut-il pas en créer ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Un <strong>index</strong> est une structure de données auxiliaire qui permet de localiser rapidement des lignes sans parcourir toute la table (full table scan).</p>
+<p><strong>Structure interne — B+Tree</strong> : la plupart des SGBD (PostgreSQL, MySQL) utilisent un arbre B+ comme structure d'index. Les nœuds internes contiennent des clés de tri, les feuilles contiennent les clés + pointeurs vers les enregistrements. Toutes les feuilles sont reliées en liste chaînée pour les scans de plage (<code>BETWEEN</code>, <code>ORDER BY</code>). Complexité : O(log n) pour la recherche.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Index B+Tree sur la colonne &quot;email&quot; :
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>             [M]
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>           /     \
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        [D, J]   [R, Z]
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>       /  |  \   /  \
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    [A-D][E-J][K-M][N-R][S-Z]
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>      |    |    |    |    |
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>   rows  rows rows rows rows  &lt;-- feuilles liées entre elles
+</span></code></pre></div>
+<p><strong>Types d'index courants</strong> :
+- <strong>B-Tree</strong> : recherche par égalité et plage (<code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>BETWEEN</code>, <code>LIKE 'abc%'</code>)
+- <strong>Hash</strong> : uniquement pour l'égalité exacte (<code>=</code>), plus rapide en lecture
+- <strong>GIN</strong> : pour les recherches full-text et les colonnes JSONB
+- <strong>Composite</strong> : index sur plusieurs colonnes — l'ordre des colonnes est crucial (la colonne la plus sélective en premier)</p>
+<p><strong>Coûts des index</strong> : chaque index doit être mis à jour à chaque INSERT, UPDATE, DELETE. Un excès d'index ralentit les écritures et augmente l'espace disque.</p>
+<p><strong>Quand ne pas créer d'index</strong> :
+- Tables de petite taille (un full scan est plus rapide)
+- Colonnes avec très peu de valeurs distinctes (faible cardinalité — ex: colonne booléenne)
+- Tables qui subissent beaucoup plus d'écritures que de lectures
+- Colonnes rarement utilisées dans les clauses <code>WHERE</code> ou <code>JOIN</code></p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">-- Voir si un index est utilisé</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">EXPLAIN</span><span class="w"> </span><span class="k">ANALYZE</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">commandes</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">client_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1">-- Créer un index composite (ordre important)</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_commandes_client_date</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="k">ON</span><span class="w"> </span><span class="n">commandes</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">);</span>
+</span></code></pre></div>
+<hr />
+<h2 id="vi-quelle-difference-entre-sql-et-nosql">VI. Quelle différence entre SQL et NoSQL ?<a class="headerlink" href="#vi-quelle-difference-entre-sql-et-nosql" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Comment choisissez-vous entre une base de données SQL et NoSQL pour un projet ? Quelles sont les garanties sacrifiées avec le NoSQL ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p><strong>SQL (relationnel)</strong> : données structurées en tables avec un schéma fixe, relations via clés étrangères, transactions ACID complètes. Idéal quand les données ont des relations complexes et que la cohérence forte est requise (finances, e-commerce, ERP).</p>
+<p><strong>NoSQL</strong> : famille de bases de données qui sacrifient certaines garanties ACID pour gagner en scalabilité, flexibilité du schéma, ou performance à grande échelle. Il existe quatre grandes familles.</p>
+<p><strong>Document (MongoDB, Firestore)</strong> : données stockées en documents JSON/BSON. Schéma flexible — chaque document peut avoir des champs différents. Idéal pour les catalogues de produits, les profils utilisateurs, les données hétérogènes.</p>
+<p><strong>Clé-Valeur (Redis, DynamoDB)</strong> : accès par clé unique, latence sub-milliseconde. Idéal pour le cache, les sessions, les compteurs en temps réel.</p>
+<p><strong>Colonne (Cassandra, HBase)</strong> : optimisé pour les écritures massives et les lectures par plage de temps. Idéal pour les séries temporelles, les logs, l'IoT.</p>
+<p><strong>Graphe (Neo4j)</strong> : nœuds et relations comme structure native. Idéal pour les réseaux sociaux, les systèmes de recommandation, la détection de fraude.</p>
+<p><strong>Le théorème CAP</strong> : un système distribué ne peut garantir simultanément que deux des trois propriétés suivantes.</p>
+<table>
+<thead>
+<tr>
+<th>Propriété</th>
+<th>Signification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>C</strong>onsistency</td>
+<td>Tous les nœuds voient les mêmes données au même moment</td>
+</tr>
+<tr>
+<td><strong>A</strong>vailability</td>
+<td>Chaque requête reçoit une réponse (sans garantie d'être à jour)</td>
+</tr>
+<tr>
+<td><strong>P</strong>artition tolerance</td>
+<td>Le système continue de fonctionner malgré des pannes réseau</td>
+</tr>
+</tbody>
+</table>
+<p>Les bases SQL privilégient <strong>CP</strong> (cohérence + tolérance aux partitions). Les bases NoSQL comme Cassandra ou DynamoDB privilégient <strong>AP</strong> (disponibilité + tolérance aux partitions) avec une cohérence éventuelle — les données finissent par converger, mais pas instantanément.</p>
+<p><strong>Modèle hybride</strong> : en production, on combine souvent les deux — PostgreSQL pour les données transactionnelles, Redis pour le cache, DynamoDB pour les sessions ou les événements.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
+        
+          
+          <a href="../design_thinking/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Design Thinking">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Précédent
+              </span>
+              <div class="md-ellipsis">
+                Design Thinking
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="#" target="_blank" rel="noopener" title="LinkedIn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.footer", "navigation.indexes", "search.highlight", "search.suggest", "search.share", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1774 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Fiches de révision techniques — GenAI, LangChain, LangGraph, AWS, Design Thinking">
+      
+      
+      
+      
+        <link rel="prev" href="../langgraph/">
+      
+      
+        <link rel="next" href="../design_thinking/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>AWS - AI Engineer Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aws" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href=".." title="AI Engineer Guide" class="md-header__button md-logo" aria-label="AI Engineer Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Engineer Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AWS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="deep-purple"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Partager" aria-label="Partager" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../python/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../oop/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  OOP & Génie Logiciel
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../gen_ai/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  GenAI
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../langchain/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  LangChain
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../langgraph/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  LangGraph
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  AWS
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../design_thinking/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Design Thinking
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../sgbd/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  SGBD
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="AI Engineer Guide" class="md-nav__button md-logo" aria-label="AI Engineer Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    AI Engineer Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OOP & Génie Logiciel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gen_ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GenAI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../langchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LangChain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../langgraph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LangGraph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Sur cette page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sur cette page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-quel-service-de-calcul-choisir-pour-un-trafic-imprevisible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Quel service de calcul choisir pour un trafic imprévisible ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-comment-optimiser-le-cout-de-stockage-de-millions-dimages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Comment optimiser le coût de stockage de millions d'images ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-rds-ou-dynamodb-pour-un-site-e-commerce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. RDS ou DynamoDB pour un site e-commerce ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-comment-appliquer-le-principe-du-moindre-privilege-avec-iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Comment appliquer le principe du moindre privilège avec IAM ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-comment-isoler-une-base-de-donnees-sensible-dans-un-vpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. Comment isoler une base de données sensible dans un VPC ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-bedrock-ou-sagemaker-pour-integrer-un-llm-dans-une-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Bedrock ou SageMaker pour intégrer un LLM dans une application ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-comment-garantir-la-disponibilite-si-un-data-center-tombe-en-panne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VII. Comment garantir la disponibilité si un Data Center tombe en panne ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii-comment-declencher-automatiquement-une-lambda-quand-un-fichier-arrive-sur-s3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIII. Comment déclencher automatiquement une Lambda quand un fichier arrive sur S3 ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ix-peut-on-interroger-un-fichier-s3-sans-le-telecharger-entierement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IX. Peut-on interroger un fichier S3 sans le télécharger entièrement ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x-comment-monitorer-et-etre-alerte-en-cas-derreur-sur-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        X. Comment monitorer et être alerté en cas d'erreur sur AWS ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xi-comment-eviter-de-perdre-des-donnees-lors-dun-pic-de-charge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XI. Comment éviter de perdre des données lors d'un pic de charge ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xii-comment-deployer-la-meme-infrastructure-en-test-et-en-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XII. Comment déployer la même infrastructure en Test et en Production ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xiii-comment-automatiser-le-deploiement-dune-lambda-depuis-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XIII. Comment automatiser le déploiement d'une Lambda depuis GitHub ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schemas-recapitulatifs-tout-aws-en-un-coup-doeil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schémas récapitulatifs — Tout AWS en un coup d'oeil
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schémas récapitulatifs — Tout AWS en un coup d&#39;oeil">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hierarchie-des-services-aws-compute-storage-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Hiérarchie des services AWS — Compute, Storage, Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-vpc-isolation-reseau-et-flux-de-trafic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. VPC — Isolation réseau et flux de trafic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pipeline-event-driven-serverless-s3-declenche-lambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Pipeline Event-Driven Serverless — S3 déclenche Lambda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-iam-roles-politiques-et-flux-dauthentification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. IAM — Rôles, Politiques et flux d'authentification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-haute-disponibilite-multi-az" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Haute Disponibilité Multi-AZ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-pipeline-cicd-aws-du-code-au-deploiement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Pipeline CI/CD AWS — Du code au déploiement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-architecture-complete-projet-analyseur-de-feedback-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Architecture complète — Projet Analyseur de Feedback Client
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_thinking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Thinking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SGBD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Sur cette page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sur cette page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-quel-service-de-calcul-choisir-pour-un-trafic-imprevisible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Quel service de calcul choisir pour un trafic imprévisible ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-comment-optimiser-le-cout-de-stockage-de-millions-dimages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Comment optimiser le coût de stockage de millions d'images ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-rds-ou-dynamodb-pour-un-site-e-commerce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. RDS ou DynamoDB pour un site e-commerce ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-comment-appliquer-le-principe-du-moindre-privilege-avec-iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Comment appliquer le principe du moindre privilège avec IAM ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-comment-isoler-une-base-de-donnees-sensible-dans-un-vpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. Comment isoler une base de données sensible dans un VPC ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-bedrock-ou-sagemaker-pour-integrer-un-llm-dans-une-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Bedrock ou SageMaker pour intégrer un LLM dans une application ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-comment-garantir-la-disponibilite-si-un-data-center-tombe-en-panne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VII. Comment garantir la disponibilité si un Data Center tombe en panne ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii-comment-declencher-automatiquement-une-lambda-quand-un-fichier-arrive-sur-s3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIII. Comment déclencher automatiquement une Lambda quand un fichier arrive sur S3 ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ix-peut-on-interroger-un-fichier-s3-sans-le-telecharger-entierement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IX. Peut-on interroger un fichier S3 sans le télécharger entièrement ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x-comment-monitorer-et-etre-alerte-en-cas-derreur-sur-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        X. Comment monitorer et être alerté en cas d'erreur sur AWS ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xi-comment-eviter-de-perdre-des-donnees-lors-dun-pic-de-charge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XI. Comment éviter de perdre des données lors d'un pic de charge ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xii-comment-deployer-la-meme-infrastructure-en-test-et-en-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XII. Comment déployer la même infrastructure en Test et en Production ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xiii-comment-automatiser-le-deploiement-dune-lambda-depuis-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XIII. Comment automatiser le déploiement d'une Lambda depuis GitHub ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schemas-recapitulatifs-tout-aws-en-un-coup-doeil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schémas récapitulatifs — Tout AWS en un coup d'oeil
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schémas récapitulatifs — Tout AWS en un coup d&#39;oeil">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hierarchie-des-services-aws-compute-storage-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Hiérarchie des services AWS — Compute, Storage, Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-vpc-isolation-reseau-et-flux-de-trafic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. VPC — Isolation réseau et flux de trafic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pipeline-event-driven-serverless-s3-declenche-lambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Pipeline Event-Driven Serverless — S3 déclenche Lambda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-iam-roles-politiques-et-flux-dauthentification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. IAM — Rôles, Politiques et flux d'authentification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-haute-disponibilite-multi-az" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Haute Disponibilité Multi-AZ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-pipeline-cicd-aws-du-code-au-deploiement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Pipeline CI/CD AWS — Du code au déploiement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-architecture-complete-projet-analyseur-de-feedback-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Architecture complète — Projet Analyseur de Feedback Client
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="aws">AWS<a class="headerlink" href="#aws" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="i-quel-service-de-calcul-choisir-pour-un-trafic-imprevisible">I. Quel service de calcul choisir pour un trafic imprévisible ?<a class="headerlink" href="#i-quel-service-de-calcul-choisir-pour-un-trafic-imprevisible" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Nous développons une application qui doit traiter des images envoyées par les utilisateurs. Le volume est imprévisible : parfois 0 image par heure, parfois 10 000. Quelle solution de calcul choisirais-tu entre Amazon EC2 et AWS Lambda, et pourquoi ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Pour un volume de requêtes imprévisible, je choisirais AWS Lambda pour trois raisons.</p>
+<p><strong>Scalabilité automatique</strong> : Lambda gère nativement la montée en charge. Si 10 000 images arrivent simultanément, AWS lance 10 000 instances de la fonction en parallèle sans aucune gestion de serveur.</p>
+<p><strong>Optimisation des coûts (pay-as-you-go)</strong> : avec Lambda, on ne paye rien quand il n'y a pas de trafic. Sur EC2, on paierait pour une machine qui tourne dans le vide.</p>
+<p><strong>Maintenance réduite</strong> : c'est du NoOps — on se concentre sur le code de traitement d'image, pas sur la mise à jour de l'OS.</p>
+<p>EC2 reste pertinent pour des charges prévisibles et constantes, des traitements longs dépassant les 15 minutes (limite Lambda), ou lorsqu'on a besoin d'un environnement d'exécution très personnalisé.</p>
+<hr />
+<h2 id="ii-comment-optimiser-le-cout-de-stockage-de-millions-dimages">II. Comment optimiser le coût de stockage de millions d'images ?<a class="headerlink" href="#ii-comment-optimiser-le-cout-de-stockage-de-millions-dimages" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "On veut stocker des millions d'images de manière sécurisée et durable, mais certaines ne seront consultées qu'une fois par an pour de l'archivage légal. Quel service et quelle classe de stockage utiliserais-tu pour optimiser la facture ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Le service de stockage d'objets phare d'AWS est Amazon S3 (Simple Storage Service). Il est virtuellement illimité et permet d'optimiser les coûts via des classes de stockage selon la fréquence d'accès.</p>
+<p><strong>S3 Standard</strong> : données consultées fréquemment, accès immédiat, durabilité 99.999999999%.</p>
+<p><strong>S3 Standard-IA (Infrequent Access)</strong> : données moins consultées mais devant rester disponibles rapidement. Moins cher que Standard, avec un coût de récupération.</p>
+<p><strong>S3 Glacier Flexible Retrieval</strong> : archivage. Stockage très peu coûteux, récupération de quelques minutes à quelques heures.</p>
+<p><strong>S3 Glacier Deep Archive</strong> : la solution la moins chère de tout AWS pour des données consultées une fois par an, récupération en 12 à 48 heures.</p>
+<p>En complément, S3 Intelligent-Tiering déplace automatiquement les objets entre classes selon leur fréquence d'accès réelle — idéal quand le pattern de consultation est incertain.</p>
+<hr />
+<h2 id="iii-rds-ou-dynamodb-pour-un-site-e-commerce">III. RDS ou DynamoDB pour un site e-commerce ?<a class="headerlink" href="#iii-rds-ou-dynamodb-pour-un-site-e-commerce" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Si je construis un site e-commerce classique avec des relations complexes entre les clients, les commandes et les produits, recommanderais-tu Amazon RDS ou Amazon DynamoDB ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Pour une application avec des relations complexes et un besoin de transactions ACID, je recommanderais Amazon RDS.</p>
+<p><strong>Gestion des relations</strong> : RDS utilise des moteurs SQL familiers (PostgreSQL, MySQL) qui permettent des jointures complexes entre plusieurs tables — clients, commandes, produits — avec des contraintes d'intégrité référentielle.</p>
+<p><strong>Service géré</strong> : AWS gère les sauvegardes automatiques, les correctifs de sécurité et la haute disponibilité via Multi-AZ, tout en laissant le contrôle sur le schéma.</p>
+<p><strong>Quand choisir DynamoDB</strong> : je réserverais DynamoDB pour des fonctionnalités nécessitant une performance constante à très grande échelle avec des accès simples par clé — gestion des sessions utilisateurs, suivi en temps réel, catalogue de produits sans jointures. DynamoDB offre une latence de l'ordre de la milliseconde quelle que soit la taille de la table.</p>
+<hr />
+<h2 id="iv-comment-appliquer-le-principe-du-moindre-privilege-avec-iam">IV. Comment appliquer le principe du moindre privilège avec IAM ?<a class="headerlink" href="#iv-comment-appliquer-le-principe-du-moindre-privilege-avec-iam" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Comment appliquez-vous le principe du moindre privilège lorsqu'une de vos fonctions Lambda doit lire un fichier spécifique dans un bucket S3 ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Pour permettre à une fonction Lambda d'accéder à S3, je n'utilise jamais d'identifiants statiques (clés d'accès hardcodées). J'utilise un Rôle IAM.</p>
+<p><strong>Le Rôle d'Exécution</strong> : je crée un rôle spécifique que la fonction Lambda "endosse". Ce rôle contient une Politique IAM (JSON) qui définit précisément ce que la fonction a le droit de faire.</p>
+<p><strong>Le Moindre Privilège</strong> : au lieu de donner un accès <code>S3FullAccess</code>, ma politique limitera l'accès à une seule action (<code>s3:GetObject</code>) sur un seul bucket spécifique identifié par son ARN.</p>
+<p><strong>Sécurité dynamique</strong> : AWS génère automatiquement des jetons de sécurité temporaires pour la fonction via le service STS (Security Token Service). Il n'y a aucun mot de passe ou clé à gérer, et les credentials expirent automatiquement.</p>
+<p>La hiérarchie IAM à retenir : <strong>Compte AWS</strong> → <strong>Utilisateurs / Groupes</strong> (personnes humaines) / <strong>Rôles</strong> (services AWS et applications) → <strong>Politiques</strong> (règles JSON <code>Allow</code>/<code>Deny</code>).</p>
+<hr />
+<h2 id="v-comment-isoler-une-base-de-donnees-sensible-dans-un-vpc">V. Comment isoler une base de données sensible dans un VPC ?<a class="headerlink" href="#v-comment-isoler-une-base-de-donnees-sensible-dans-un-vpc" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "On a une base de données RDS contenant des données clients sensibles. Doit-on la placer dans un Sous-réseau Public ou Privé, et comment l'application peut-elle y accéder ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Je place systématiquement la base de données RDS dans un <strong>sous-réseau privé</strong> — sans route vers Internet Gateway, donc inaccessible depuis Internet.</p>
+<p><strong>Accès via Security Groups</strong> : je crée une règle dans le Security Group de la base qui autorise uniquement le trafic entrant provenant du Security Group spécifique du serveur d'application. L'autorisation est basée sur l'identité de la source, pas son IP.</p>
+<p><strong>Connectivité privée</strong> : l'application communique avec la base via le réseau interne d'AWS (backbone privé). Aucune donnée ne transite par Internet public.</p>
+<p><strong>Accès maintenance</strong> : si j'ai besoin d'accéder moi-même à la base pour de la maintenance, j'utilise un Bastion Host (serveur de saut dans le sous-réseau public) ou AWS Systems Manager Session Manager (sans ouvrir de port SSH).</p>
+<hr />
+<h2 id="vi-bedrock-ou-sagemaker-pour-integrer-un-llm-dans-une-application">VI. Bedrock ou SageMaker pour intégrer un LLM dans une application ?<a class="headerlink" href="#vi-bedrock-ou-sagemaker-pour-integrer-un-llm-dans-une-application" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Si nous voulons intégrer un modèle comme Claude 3 ou Llama 3 dans notre application sans gérer l'infrastructure ou l'entraînement, quel service AWS utiliser ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Pour intégrer des modèles de fondation rapidement et sans gérer d'infrastructure, je choisirais Amazon Bedrock.</p>
+<p><strong>Serverless API-first</strong> : Bedrock est entièrement géré. On appelle le modèle via une API unifiée (similaire à l'API OpenAI), sans serveur à configurer ni GPU à louer. C'est parfait pour des architectures d'agents construits avec LangGraph.</p>
+<p><strong>Multi-modèles</strong> : Bedrock donne accès à plusieurs fournisseurs — Anthropic (Claude), Meta (Llama), Mistral, Cohere, Amazon Titan — depuis une seule API, ce qui évite le vendor lock-in.</p>
+<p><strong>Souveraineté des données</strong> : les données envoyées à Bedrock ne sont jamais utilisées pour entraîner les modèles de base — garantie contractuelle importante pour les entreprises soumises au RGPD.</p>
+<p><strong>Quand choisir SageMaker</strong> : uniquement si on a besoin d'entraîner un modèle propriétaire à partir de zéro, de faire du Fine-Tuning avec contrôle total sur l'infrastructure GPU, ou de déployer ses propres endpoints d'inférence personnalisés.</p>
+<hr />
+<h2 id="vii-comment-garantir-la-disponibilite-si-un-data-center-tombe-en-panne">VII. Comment garantir la disponibilité si un Data Center tombe en panne ?<a class="headerlink" href="#vii-comment-garantir-la-disponibilite-si-un-data-center-tombe-en-panne" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Comment s'assure-t-on que notre application reste disponible même si un centre de données entier d'AWS tombe en panne ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Pour garantir la disponibilité face à une panne physique, j'utilise une architecture Multi-AZ.</p>
+<p><strong>Définition d'une AZ</strong> : une Zone de Disponibilité est composée d'un ou plusieurs centres de données physiquement isolés les uns des autres au sein d'une même Région, avec leur propre alimentation électrique, réseau et système de refroidissement.</p>
+<p><strong>RDS Multi-AZ</strong> : AWS crée une instance RDS secondaire dans une autre AZ et réplique les données de façon synchrone. Si l'AZ principale tombe, le basculement (failover) est automatique et transparent — typiquement en moins de 60 secondes.</p>
+<p><strong>Application Load Balancer</strong> : pour le calcul (EC2 ou ECS), je distribue les instances sur plusieurs AZ derrière un ALB. Si une AZ devient indisponible, l'ALB redirige automatiquement tout le trafic vers les AZ saines.</p>
+<p>À ne pas confondre : <strong>Multi-AZ</strong> = haute disponibilité dans une région. <strong>Multi-Region</strong> = disaster recovery à l'échelle géographique (latence plus basse pour les utilisateurs mondiaux, tolérance aux catastrophes régionales).</p>
+<hr />
+<h2 id="viii-comment-declencher-automatiquement-une-lambda-quand-un-fichier-arrive-sur-s3">VIII. Comment déclencher automatiquement une Lambda quand un fichier arrive sur S3 ?<a class="headerlink" href="#viii-comment-declencher-automatiquement-une-lambda-quand-un-fichier-arrive-sur-s3" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Chaque fois qu'un utilisateur télécharge un fichier PDF sur S3, nous devons automatiquement extraire le texte et l'enregistrer dans une base de données. Comment metttre cela en place de la manière la plus efficace ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Je configurerais une <strong>S3 Event Notification</strong> sur le bucket pour déclencher une architecture Event-Driven entièrement serverless.</p>
+<p><strong>Le déclencheur</strong> : dès qu'un fichier est uploadé (événement <code>s3:ObjectCreated</code>), S3 envoie automatiquement un message contenant les métadonnées du fichier (nom, taille, emplacement).</p>
+<p><strong>L'exécution</strong> : ce message déclenche immédiatement une fonction Lambda. Pour absorber des pics de charge, on peut intercaler une file SQS entre S3 et Lambda — S3 publie dans SQS, Lambda consomme depuis SQS avec un batch contrôlé.</p>
+<p><strong>Le traitement</strong> : la Lambda récupère le fichier depuis S3, utilise Amazon Textract pour l'extraction de texte, et écrit le résultat dans DynamoDB.</p>
+<p><strong>L'avantage</strong> : architecture 100% serverless — on ne paye rien si aucun fichier n'est déposé, et le système peut traiter des milliers de fichiers en parallèle sans intervention manuelle.</p>
+<hr />
+<h2 id="ix-peut-on-interroger-un-fichier-s3-sans-le-telecharger-entierement">IX. Peut-on interroger un fichier S3 sans le télécharger entièrement ?<a class="headerlink" href="#ix-peut-on-interroger-un-fichier-s3-sans-le-telecharger-entierement" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Si nous avons un fichier CSV de 10 Go stocké sur S3 et que nous ne voulons extraire que les lignes concernant l'année 2024, est-il obligatoire de télécharger tout le fichier dans notre code ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Non, grâce à <strong>S3 Select</strong> (et son équivalent pour Glacier, Glacier Select).</p>
+<p><strong>Principe</strong> : S3 Select permet d'exécuter des requêtes SQL simples directement sur S3, côté serveur. AWS filtre les données avant de les envoyer — seules les lignes correspondant au filtre sont transférées.</p>
+<p><strong>Avantage concret</strong> : pour un CSV de 10 Go dont seulement 200 Mo concernent 2024, on ne transfère que les 200 Mo utiles au lieu des 10 Go. Gain direct sur la bande passante, la mémoire Lambda consommée et donc le coût.</p>
+<p><strong>Formats supportés</strong> : CSV, JSON, Parquet (colonnes sélectives).</p>
+<p>Pour des analyses encore plus complexes, Amazon Athena permet de lancer des requêtes SQL complètes sur des fichiers S3 sans aucun serveur — architecture Data Lake serverless.</p>
+<hr />
+<h2 id="x-comment-monitorer-et-etre-alerte-en-cas-derreur-sur-aws">X. Comment monitorer et être alerté en cas d'erreur sur AWS ?<a class="headerlink" href="#x-comment-monitorer-et-etre-alerte-en-cas-derreur-sur-aws" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Comment faites-vous pour savoir qu'une erreur s'est produite, et où allez-vous pour lire les messages d'erreur générés par votre code Python dans le Cloud ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Le service central de surveillance sur AWS est <strong>Amazon CloudWatch</strong>, qui repose sur trois piliers.</p>
+<p><strong>CloudWatch Logs</strong> : centralise tous les journaux d'erreurs et les <code>print()</code> des fonctions Lambda ou des serveurs EC2. C'est là qu'on va pour débugger un crash — chaque invocation Lambda crée automatiquement un log stream.</p>
+<p><strong>CloudWatch Metrics</strong> : collecte des données chiffrées — taux d'utilisation CPU, nombre de requêtes par seconde, durée d'exécution Lambda, taux d'erreur.</p>
+<p><strong>CloudWatch Alarms</strong> : surveille une métrique et déclenche une action quand un seuil est dépassé (ex : taux d'erreur Lambda &gt; 5%).</p>
+<p><strong>Le circuit d'alerte</strong> : l'alarme CloudWatch publie dans un Topic <strong>Amazon SNS</strong> (Simple Notification Service), qui distribue ensuite la notification à tous ses abonnés — email, SMS, Slack via Lambda, ou déclenchement d'une action automatique (ex : Auto Scaling).</p>
+<hr />
+<h2 id="xi-comment-eviter-de-perdre-des-donnees-lors-dun-pic-de-charge">XI. Comment éviter de perdre des données lors d'un pic de charge ?<a class="headerlink" href="#xi-comment-eviter-de-perdre-des-donnees-lors-dun-pic-de-charge" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Imaginez que votre application reçoive des milliers de commandes par seconde, mais que votre base de données soit trop lente pour les enregistrer toutes instantanément. Quel service utiliseriez-vous pour ne perdre aucune donnée ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Pour absorber un pic de charge sans perdre de données, j'utiliserais <strong>Amazon SQS</strong> pour découpler les composants.</p>
+<p><strong>Mise en file</strong> : au lieu d'écrire directement dans la base, l'application place chaque message (commande) dans une file SQS. L'opération d'enqueue est quasi instantanée et n'est jamais bloquée par la vitesse de la base.</p>
+<p><strong>Traitement asynchrone</strong> : une Lambda (ou un serveur EC2/ECS) consomme les messages de la file à son rythme, avec contrôle du batch et de la concurrence.</p>
+<p><strong>Résilience</strong> : si la base est temporairement indisponible, les messages restent en sécurité dans SQS jusqu'à 14 jours. Une Dead Letter Queue (DLQ) capture les messages qui échouent plusieurs fois pour analyse ultérieure.</p>
+<p><strong>SQS vs SNS</strong> : SQS = file point-à-point (un seul consommateur traite chaque message). SNS = pub/sub (un message est distribué à tous les abonnés simultanément). En production on combine souvent les deux : SNS fan-out vers plusieurs files SQS.</p>
+<hr />
+<h2 id="xii-comment-deployer-la-meme-infrastructure-en-test-et-en-production">XII. Comment déployer la même infrastructure en Test et en Production ?<a class="headerlink" href="#xii-comment-deployer-la-meme-infrastructure-en-test-et-en-production" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Si je vous demande de recréer exactement la même infrastructure (VPC, Lambda, S3, RDS) pour un environnement de Test et un environnement de Production, allez-vous tout refaire à la main dans la console AWS ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Non. Je n'utilise jamais la console pour provisionner des environnements. J'utilise l'<strong>Infrastructure as Code</strong> avec AWS CloudFormation ou Terraform.</p>
+<p><strong>Automatisation et répétabilité</strong> : on écrit un fichier de configuration (YAML pour CloudFormation, HCL pour Terraform) qui décrit toutes les ressources. Toute l'infrastructure se recrée en quelques minutes sans erreur humaine.</p>
+<p><strong>Versionnage</strong> : le code d'infrastructure est stocké sur Git. On voit l'historique des modifications, on peut rollback en cas de problème, et plusieurs personnes peuvent contribuer via des PR.</p>
+<p><strong>Parité des environnements</strong> : cela garantit que Test est le miroir exact de Production — ce qui évite les bugs spécifiques à un environnement et facilite la détection des régressions.</p>
+<p><strong>CloudFormation vs Terraform</strong> : CloudFormation est natif AWS (gratuit, bien intégré, gestion d'état automatique). Terraform est agnostique au cloud (multi-providers), plus flexible, mais nécessite de gérer le state file (souvent stocké dans S3 + DynamoDB pour le lock).</p>
+<hr />
+<h2 id="xiii-comment-automatiser-le-deploiement-dune-lambda-depuis-github">XIII. Comment automatiser le déploiement d'une Lambda depuis GitHub ?<a class="headerlink" href="#xiii-comment-automatiser-le-deploiement-dune-lambda-depuis-github" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Une fois que ton code Python est poussé sur GitHub, comment fais-tu pour qu'il soit déployé automatiquement sur AWS sans cliquer manuellement dans la console ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Je mettrais en place un pipeline CI/CD avec la suite AWS CodeSuite ou GitHub Actions + AWS.</p>
+<p><strong>CodePipeline</strong> : c'est le chef d'orchestre. Dès qu'un développeur push sur la branche main, le pipeline se déclenche automatiquement via un webhook.</p>
+<p><strong>CodeBuild</strong> : le code est récupéré, les dépendances sont installées, les tests unitaires s'exécutent dans un environnement isolé. Si un test échoue, le déploiement s'arrête — la production est protégée.</p>
+<p><strong>CodeDeploy / Lambda</strong> : une fois les tests validés, le nouveau code est déployé. Pour Lambda, on peut utiliser des stratégies de déploiement progressif : Canary (10% du trafic sur la nouvelle version, puis 100% après validation) ou Linear (incrément progressif toutes les N minutes).</p>
+<p><strong>Avec GitHub Actions</strong> : alternative légère et flexible, on utilise <code>aws-actions/configure-aws-credentials</code> pour authentifier le pipeline via un Rôle IAM OIDC (sans stocker de clés statiques dans GitHub Secrets).</p>
+<hr />
+<h2 id="schemas-recapitulatifs-tout-aws-en-un-coup-doeil">Schémas récapitulatifs — Tout AWS en un coup d'oeil<a class="headerlink" href="#schemas-recapitulatifs-tout-aws-en-un-coup-doeil" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="1-hierarchie-des-services-aws-compute-storage-database">1. Hiérarchie des services AWS — Compute, Storage, Database<a class="headerlink" href="#1-hierarchie-des-services-aws-compute-storage-database" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : la carte mentale des trois familles de services AWS les plus importantes. <strong>Compute</strong> : EC2 (serveurs persistants) vs Lambda (fonctions éphémères event-driven) vs ECS/EKS (conteneurs). <strong>Storage</strong> : S3 (objets, illimité) vs EBS (disque attaché à EC2) vs EFS (système de fichiers partagé). <strong>Database</strong> : RDS (SQL relationnel géré) vs DynamoDB (NoSQL clé-valeur, ms de latence) vs ElastiCache (cache Redis/Memcached en mémoire). La règle : choisir le service le plus spécialisé pour chaque besoin plutôt qu'un service généraliste surchargé.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>                        COMPTE AWS
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                            |
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>              +-------------+-------------+
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>              |             |             |
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>           COMPUTE       STORAGE      DATABASE
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>           -------       -------      --------
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>           EC2            S3           RDS
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>           (VM persistante)(objets)   (PostgreSQL/MySQL)
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                |           |             |
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>           Lambda          EBS           DynamoDB
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>           (event-driven) (disque EC2)  (NoSQL, &lt;10ms)
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>                |           |             |
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>           ECS / EKS       EFS          ElastiCache
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>           (conteneurs)  (NFS partagé) (Redis/Memcached)
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>           NETWORKING           MESSAGING         MONITORING
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>           ----------           ---------         ----------
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>           VPC                  SQS               CloudWatch
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>           (réseau isolé)       (file d&#39;attente)  (logs+metrics)
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                |                    |                  |
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>           ALB/NLB                  SNS               X-Ray
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>           (load balancing)         (pub/sub)         (tracing)
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>                |                    |
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>           Route 53             EventBridge
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>           (DNS)                (bus d&#39;événements)
+</span></code></pre></div>
+<hr />
+<h3 id="2-vpc-isolation-reseau-et-flux-de-trafic">2. VPC — Isolation réseau et flux de trafic<a class="headerlink" href="#2-vpc-isolation-reseau-et-flux-de-trafic" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : comment structurer un réseau AWS sécurisé. Le VPC est un réseau privé virtuel dans une Région. Il contient deux types de sous-réseaux : <strong>publics</strong> (accessibles depuis Internet via Internet Gateway) pour les composants exposés (ALB, Bastion), et <strong>privés</strong> (sans route Internet) pour les ressources sensibles (RDS, Lambda, EC2 applicatif). Les Security Groups jouent le rôle de firewall stateful au niveau instance — la règle clé : le Security Group de RDS n'accepte que le trafic venant du Security Group de l'application, pas depuis Internet.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>INTERNET
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    |
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    v
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>[Internet Gateway]
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    |
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    v
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>+-- VPC (10.0.0.0/16) -----------------------------------------+
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>|                                                                |
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>|  Sous-réseau PUBLIC (10.0.1.0/24)   AZ-1                      |
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>|  +------------------------------------------+                 |
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>|  | Application Load Balancer (ALB)          |                 |
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>|  | Bastion Host (accès SSH maintenance)     |                 |
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>|  +------------------------------------------+                 |
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>|              |                                                 |
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>|              | (trafic filtré par Security Group)              |
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>|              v                                                 |
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>|  Sous-réseau PRIVE (10.0.2.0/24)   AZ-1                       |
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>|  +------------------------------------------+                 |
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>|  | EC2 / Lambda / ECS (applicatif)          |                 |
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>|  | SG App: accepte 443 depuis ALB SG        |                 |
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>|  +------------------------------------------+                 |
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>|              |                                                 |
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>|  Sous-réseau PRIVE (10.0.3.0/24)   AZ-1                       |
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>|  +------------------------------------------+                 |
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>|  | RDS PostgreSQL                           |                 |
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>|  | SG DB: accepte 5432 depuis SG App ONLY   |                 |
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>|  +------------------------------------------+                 |
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>|                                                                |
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>|  [Meme structure miroir dans AZ-2 pour Multi-AZ]              |
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>+----------------------------------------------------------------+
+</span></code></pre></div>
+<hr />
+<h3 id="3-pipeline-event-driven-serverless-s3-declenche-lambda">3. Pipeline Event-Driven Serverless — S3 déclenche Lambda<a class="headerlink" href="#3-pipeline-event-driven-serverless-s3-declenche-lambda" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : le pattern le plus courant en architecture serverless AWS. Un événement sur S3 (upload de fichier) déclenche automatiquement une chaîne de traitement sans aucun serveur à gérer. L'ajout d'une file SQS entre S3 et Lambda est la bonne pratique de production : elle absorbe les pics (si 10 000 fichiers arrivent en même temps, SQS les met en file et Lambda les traite à son rythme), et la Dead Letter Queue (DLQ) capte les messages en échec pour investigation.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Utilisateur
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    |
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    | upload fichier
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    v
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>[Amazon S3]
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    |
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    | s3:ObjectCreated Event
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    v
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>[Amazon SQS]  &lt;-- tampon qui absorbe les pics de charge
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    |               Messages conservés jusqu&#39;a 14 jours
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    | poll (batch)
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    v
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>[AWS Lambda]  (code Python / LangChain)
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    |
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    +----------&gt; [Amazon Textract]  (extraction texte PDF)
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    |
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    +----------&gt; [Amazon Bedrock]   (analyse IA, résumé)
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    |
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    +----------&gt; [Amazon DynamoDB]  (stockage résultat)
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    |
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    +----------&gt; [CloudWatch Logs]  (logs de l&#39;exécution)
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>                      |
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>                      | si erreur &gt; seuil
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>                      v
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>               [CloudWatch Alarm]
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>                      |
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>                      v
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>                [Amazon SNS Topic]
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>                      |
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>               +------+------+
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>               |             |
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>           Email          Slack
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>           (support)      (webhook Lambda)
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>Cas d&#39;erreur : Lambda envoie le message en DLQ (Dead Letter Queue)
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>pour analyse manuelle plutôt que de le perdre.
+</span></code></pre></div>
+<hr />
+<h3 id="4-iam-roles-politiques-et-flux-dauthentification">4. IAM — Rôles, Politiques et flux d'authentification<a class="headerlink" href="#4-iam-roles-politiques-et-flux-dauthentification" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : comment IAM contrôle qui peut faire quoi sur AWS. La distinction centrale : les <strong>Utilisateurs/Groupes</strong> sont pour les humains (identifiants permanents), les <strong>Rôles</strong> sont pour les services AWS et applications (credentials temporaires générés par STS). Une Politique est un document JSON qui liste des <code>Allow</code> ou <code>Deny</code> sur des actions (<code>s3:GetObject</code>) et des ressources (ARN du bucket). Le principe du moindre privilège : commencer par tout refuser, n'ouvrir que ce qui est strictement nécessaire.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>IDENTITES IAM
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>=============
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Compte Root                     (ne jamais utiliser au quotidien)
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    |
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    +-- Utilisateur IAM          (personne humaine, clés permanentes)
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    |       |
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    |       +-- Groupe IAM       (ensemble d&#39;utilisateurs, politiques communes)
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    |
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    +-- Role IAM                 (identité endossée par un service ou une app)
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>            |
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>            +-- EC2 Instance Profile  --&gt; EC2 accede a S3/DynamoDB
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>            +-- Lambda Execution Role --&gt; Lambda accede a S3/RDS
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>            +-- ECS Task Role         --&gt; conteneur accede a Secrets Manager
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>POLITIQUE IAM (JSON)
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>====================
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>{
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>  &quot;Version&quot;: &quot;2012-10-17&quot;,
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>  &quot;Statement&quot;: [{
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>    &quot;Effect&quot;: &quot;Allow&quot;,
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>    &quot;Action&quot;: [&quot;s3:GetObject&quot;],          &lt;-- action precise
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    &quot;Resource&quot;: &quot;arn:aws:s3:::mon-bucket/images/*&quot;  &lt;-- ressource precise
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>  }]
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>}
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>Evaluation des permissions :
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>  Request --&gt; IAM evalue toutes les politiques attachees
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>      |
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>      +-- DENY explicite ?  --&gt; REFUSE (prioritaire sur tout)
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>      +-- ALLOW explicite ? --&gt; AUTORISE
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>      +-- Aucun des deux   --&gt; REFUSE (deny par defaut)
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>FLUX STS (credentials temporaires)
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>====================================
+</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>
+</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>Lambda demarre
+</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>    |
+</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>    v
+</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>AWS STS genere : AccessKeyId + SecretAccessKey + SessionToken
+</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>    |             (valables 15min a 12h, jamais stockes dans le code)
+</span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>    v
+</span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>Lambda appelle S3 avec ces credentials temporaires
+</span></code></pre></div>
+<hr />
+<h3 id="5-haute-disponibilite-multi-az">5. Haute Disponibilité Multi-AZ<a class="headerlink" href="#5-haute-disponibilite-multi-az" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : comment une application résiste à la panne d'un Data Center entier. L'ALB distribue le trafic sur plusieurs AZ — si AZ-1 tombe, AZ-2 et AZ-3 absorbent 100% du trafic automatiquement, sans intervention manuelle. Pour RDS, la réplication synchrone vers l'instance standby garantit 0 perte de données lors du failover. À retenir pour l'entretien : Multi-AZ = haute disponibilité (même région), Multi-Region = disaster recovery (régions géographiques différentes, latence réduite pour utilisateurs mondiaux).</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>                    INTERNET
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>                        |
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>                        v
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>             [Route 53 DNS]
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>                        |
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>                        v
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>         [Application Load Balancer]
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>          (distribue sur toutes les AZ)
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                        |
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>          +-------------+-------------+
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>          |             |             |
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>          v             v             v
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        AZ-1           AZ-2          AZ-3
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>   +----------+   +----------+  +----------+
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>   | EC2 / ECS|   | EC2 / ECS|  | EC2 / ECS|
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>   +----------+   +----------+  +----------+
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>          |             |             |
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>          +------+------+             |
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>                 |                    |
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>                 v                    |
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>         +---------------+           |
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>         | RDS Primary   | &lt;---------+
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>         | (AZ-1)        |   réplication synchrone
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>         +---------------+           |
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>                 |                   v
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>                 |          +---------------+
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>                 |          | RDS Standby   |
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>                 |          | (AZ-2)        |
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>                 |          +---------------+
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>                 |
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>         Si AZ-1 tombe :
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>         1. ALB detecte les instances unhealthy (health checks)
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>         2. Tout le trafic est redirige vers AZ-2 et AZ-3
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>         3. RDS bascule automatiquement sur le Standby (&lt; 60s)
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>         4. Aucune intervention manuelle requise
+</span></code></pre></div>
+<hr />
+<h3 id="6-pipeline-cicd-aws-du-code-au-deploiement">6. Pipeline CI/CD AWS — Du code au déploiement<a class="headerlink" href="#6-pipeline-cicd-aws-du-code-au-deploiement" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : comment le code passe automatiquement de GitHub à la production sur AWS. Chaque push déclenche la chaîne complète : tests → build → déploiement. Le déploiement Canary est le pattern le plus prudent pour une Lambda critique : 10% du trafic sur la nouvelle version pendant N minutes, CloudWatch surveille les erreurs, et si tout va bien, bascule automatique à 100%. En cas d'erreur détectée, rollback automatique vers la version précédente.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Développeur
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    |
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    | git push origin main
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    v
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>[GitHub / CodeCommit]
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    |
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    | webhook / event
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    v
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>[AWS CodePipeline]  -- chef d&#39;orchestre du pipeline
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    |
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    v
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>[AWS CodeBuild]  -- environnement isolé
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    | - pip install -r requirements.txt
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    | - pytest tests/                    &lt;-- si echec : pipeline STOP
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    | - docker build / sam build
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    v
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>[Artifact Store S3]  -- package deployable stocke
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    |
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>    v
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>[AWS CodeDeploy / Lambda Deploy]
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>    |
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>    +-- Strategie ALL_AT_ONCE   : deploiement immediat (dev/test)
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>    |
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>    +-- Strategie CANARY        : (production recommandee)
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>    |       |
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>    |       | 10% trafic --&gt; nouvelle version
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>    |       | CloudWatch surveille taux d&#39;erreur
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>    |       |     |
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>    |       |     +-- Erreur detectee --&gt; ROLLBACK automatique
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>    |       |     |
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>    |       |     +-- OK apres 10min  --&gt; 100% trafic bascule
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>    |
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>    +-- Strategie LINEAR        : incrementiel (5% toutes les 5min)
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>Monitoring post-deploy : CloudWatch Alarm
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>    --&gt; si erreur rate &gt; 1% dans les 30min post-deploy
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>    --&gt; rollback automatique + notification SNS
+</span></code></pre></div>
+<hr />
+<h3 id="7-architecture-complete-projet-analyseur-de-feedback-client">7. Architecture complète — Projet Analyseur de Feedback Client<a class="headerlink" href="#7-architecture-complete-projet-analyseur-de-feedback-client" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : l'intégration de tous les services AWS vus dans ce fichier dans une architecture production réelle. Chaque service joue un rôle précis : API Gateway expose l'entrée, SQS absorbe les pics, Lambda exécute la logique métier, Bedrock fournit l'intelligence IA, DynamoDB stocke les résultats structurés, CloudWatch + SNS gèrent les alertes. Terraform et CodePipeline automatisent le déploiement de toute cette infrastructure. C'est le schéma à citer en entretien pour montrer qu'on sait assembler AWS de bout en bout.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Client (app mobile / web)
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>         |
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>         | POST /feedback
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>         v
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>[API Gateway]                   &lt;-- point d&#39;entrée HTTPS unique
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>         |
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>         v
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>[Amazon SQS]                    &lt;-- découplage, absorbe les pics (soldes)
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>         |
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>         | trigger (batch de 10 messages)
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>         v
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>[AWS Lambda]  (Python + LangChain / LangGraph)
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>         |
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>         +--------&gt; [Amazon Bedrock (Claude 3)]
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>         |           analyse sentiment + résumé de l&#39;avis
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>         |                    |
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>         |                    v
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>         +--------&gt; [Amazon DynamoDB]
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>         |           stockage : {feedback_id, sentiment, résumé, timestamp}
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>         |
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>         +--------&gt; [CloudWatch Logs]
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>                     logs d&#39;exécution + métriques custom
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>                              |
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>                              | si sentiment = &quot;DANGER&quot; ou erreur Lambda
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>                              v
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>                    [CloudWatch Alarm]
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>                              |
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>                              v
+</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>                    [Amazon SNS Topic]
+</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>                              |
+</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>                    +---------+---------+
+</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>                    |                   |
+</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>                 Email              Slack webhook
+</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>                (support)          (équipe produit)
+</span><span id="__span-6-35"><a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>
+</span><span id="__span-6-36"><a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a>
+</span><span id="__span-6-37"><a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>INFRASTRUCTURE &amp; DÉPLOIEMENT
+</span><span id="__span-6-38"><a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>==============================
+</span><span id="__span-6-39"><a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a>
+</span><span id="__span-6-40"><a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a>Code (GitHub)
+</span><span id="__span-6-41"><a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a>    |
+</span><span id="__span-6-42"><a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a>    v
+</span><span id="__span-6-43"><a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a>[CodePipeline --&gt; CodeBuild --&gt; CodeDeploy]
+</span><span id="__span-6-44"><a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a>    - Tests unitaires automatiques
+</span><span id="__span-6-45"><a id="__codelineno-6-45" name="__codelineno-6-45" href="#__codelineno-6-45"></a>    - Déploiement Canary sur Lambda
+</span><span id="__span-6-46"><a id="__codelineno-6-46" name="__codelineno-6-46" href="#__codelineno-6-46"></a>    - Rollback automatique si erreur
+</span><span id="__span-6-47"><a id="__codelineno-6-47" name="__codelineno-6-47" href="#__codelineno-6-47"></a>
+</span><span id="__span-6-48"><a id="__codelineno-6-48" name="__codelineno-6-48" href="#__codelineno-6-48"></a>[Terraform]
+</span><span id="__span-6-49"><a id="__codelineno-6-49" name="__codelineno-6-49" href="#__codelineno-6-49"></a>    - Provisionne VPC, Lambda, SQS, DynamoDB, IAM Roles
+</span><span id="__span-6-50"><a id="__codelineno-6-50" name="__codelineno-6-50" href="#__codelineno-6-50"></a>    - State stocké dans S3 + DynamoDB (lock)
+</span><span id="__span-6-51"><a id="__codelineno-6-51" name="__codelineno-6-51" href="#__codelineno-6-51"></a>    - Même code = environnements Test / Prod identiques
+</span><span id="__span-6-52"><a id="__codelineno-6-52" name="__codelineno-6-52" href="#__codelineno-6-52"></a>
+</span><span id="__span-6-53"><a id="__codelineno-6-53" name="__codelineno-6-53" href="#__codelineno-6-53"></a>
+</span><span id="__span-6-54"><a id="__codelineno-6-54" name="__codelineno-6-54" href="#__codelineno-6-54"></a>SYNTHESE DES SERVICES
+</span><span id="__span-6-55"><a id="__codelineno-6-55" name="__codelineno-6-55" href="#__codelineno-6-55"></a>======================
+</span><span id="__span-6-56"><a id="__codelineno-6-56" name="__codelineno-6-56" href="#__codelineno-6-56"></a>
+</span><span id="__span-6-57"><a id="__codelineno-6-57" name="__codelineno-6-57" href="#__codelineno-6-57"></a>Service          Role dans ce projet
+</span><span id="__span-6-58"><a id="__codelineno-6-58" name="__codelineno-6-58" href="#__codelineno-6-58"></a>-----------      -------------------
+</span><span id="__span-6-59"><a id="__codelineno-6-59" name="__codelineno-6-59" href="#__codelineno-6-59"></a>API Gateway      Entrée HTTPS, throttling, auth JWT
+</span><span id="__span-6-60"><a id="__codelineno-6-60" name="__codelineno-6-60" href="#__codelineno-6-60"></a>SQS              Tampon, découplage, résilience aux pics
+</span><span id="__span-6-61"><a id="__codelineno-6-61" name="__codelineno-6-61" href="#__codelineno-6-61"></a>Lambda           Logique métier Python, NoOps
+</span><span id="__span-6-62"><a id="__codelineno-6-62" name="__codelineno-6-62" href="#__codelineno-6-62"></a>Bedrock          IA générative sans gestion GPU
+</span><span id="__span-6-63"><a id="__codelineno-6-63" name="__codelineno-6-63" href="#__codelineno-6-63"></a>DynamoDB         Stockage NoSQL rapide, scalable
+</span><span id="__span-6-64"><a id="__codelineno-6-64" name="__codelineno-6-64" href="#__codelineno-6-64"></a>CloudWatch       Logs, métriques, alertes
+</span><span id="__span-6-65"><a id="__codelineno-6-65" name="__codelineno-6-65" href="#__codelineno-6-65"></a>SNS              Distribution notifications multi-canal
+</span><span id="__span-6-66"><a id="__codelineno-6-66" name="__codelineno-6-66" href="#__codelineno-6-66"></a>Terraform        Infrastructure as Code
+</span><span id="__span-6-67"><a id="__codelineno-6-67" name="__codelineno-6-67" href="#__codelineno-6-67"></a>CodePipeline     CI/CD automatisé
+</span><span id="__span-6-68"><a id="__codelineno-6-68" name="__codelineno-6-68" href="#__codelineno-6-68"></a>IAM              Sécurité, moindre privilège, rôles
+</span><span id="__span-6-69"><a id="__codelineno-6-69" name="__codelineno-6-69" href="#__codelineno-6-69"></a>VPC              Isolation réseau, sous-réseaux privés
+</span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
+        
+          
+          <a href="../langgraph/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: LangGraph">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Précédent
+              </span>
+              <div class="md-ellipsis">
+                LangGraph
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../design_thinking/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Design Thinking">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Suivant
+              </span>
+              <div class="md-ellipsis">
+                Design Thinking
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="#" target="_blank" rel="noopener" title="LinkedIn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.footer", "navigation.indexes", "search.highlight", "search.suggest", "search.share", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

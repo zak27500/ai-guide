@@ -1,0 +1,1538 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Fiches de révision techniques — GenAI, LangChain, LangGraph, AWS, Design Thinking">
+      
+      
+      
+      
+        <link rel="prev" href="../aws/">
+      
+      
+        <link rel="next" href="../sgbd/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Design Thinking - AI Engineer Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#design-thinking" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href=".." title="AI Engineer Guide" class="md-header__button md-logo" aria-label="AI Engineer Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Engineer Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Design Thinking
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="deep-purple"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Partager" aria-label="Partager" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../python/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../oop/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  OOP & Génie Logiciel
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../gen_ai/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  GenAI
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../langchain/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  LangChain
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../langgraph/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  LangGraph
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../aws/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  AWS
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Design Thinking
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../sgbd/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  SGBD
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="AI Engineer Guide" class="md-nav__button md-logo" aria-label="AI Engineer Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    AI Engineer Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OOP & Génie Logiciel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gen_ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GenAI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../langchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LangChain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../langgraph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LangGraph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Thinking
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Thinking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Sur cette page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sur cette page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-quelle-est-la-philosophie-fondamentale-du-design-thinking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Quelle est la philosophie fondamentale du Design Thinking ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-pourquoi-lobservation-vaut-plus-quun-sondage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Pourquoi l'observation vaut plus qu'un sondage ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-comment-passer-dune-masse-dobservations-a-un-probleme-clair" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. Comment passer d'une masse d'observations à un problème clair ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-comment-reagir-face-a-une-idee-irrealiste-en-brainstorming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Comment réagir face à une idée irréaliste en brainstorming ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-pourquoi-prototyper-en-basse-fidelite-plutot-que-construire-une-beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. Pourquoi prototyper en basse fidélité plutôt que construire une bêta ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-quelle-posture-adopter-pendant-les-tests-utilisateurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Quelle posture adopter pendant les tests utilisateurs ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-un-rejet-des-utilisateurs-signifie-t-il-lechec-du-projet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VII. Un rejet des utilisateurs signifie-t-il l'échec du projet ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii-pourquoi-travailler-en-equipe-pluridisciplinaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIII. Pourquoi travailler en équipe pluridisciplinaire ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ix-quelle-qualite-est-indispensable-pour-pratiquer-le-design-thinking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IX. Quelle qualité est indispensable pour pratiquer le Design Thinking ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x-quel-est-le-benefice-principal-pour-une-organisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        X. Quel est le bénéfice principal pour une organisation ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schemas-recapitulatifs-tout-le-design-thinking-en-un-coup-doeil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schémas récapitulatifs — Tout le Design Thinking en un coup d'oeil
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schémas récapitulatifs — Tout le Design Thinking en un coup d&#39;oeil">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-les-5-phases-cycle-iteratif-non-lineaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Les 5 phases — Cycle itératif non linéaire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-le-triangle-dequilibre-desirable-faisable-viable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Le triangle d'equilibre — Desirable / Faisable / Viable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-persona-pov-statement-de-lobservation-au-probleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Persona + POV Statement — De l'observation au problème
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-pensee-divergente-vs-pensee-convergente-le-moteur-de-lideation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Pensee divergente vs Pensee convergente — Le moteur de l'Ideation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-vue-densemble-flux-complet-dun-projet-design-thinking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Vue d'ensemble — Flux complet d'un projet Design Thinking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SGBD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Sur cette page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sur cette page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-quelle-est-la-philosophie-fondamentale-du-design-thinking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Quelle est la philosophie fondamentale du Design Thinking ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-pourquoi-lobservation-vaut-plus-quun-sondage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Pourquoi l'observation vaut plus qu'un sondage ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-comment-passer-dune-masse-dobservations-a-un-probleme-clair" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. Comment passer d'une masse d'observations à un problème clair ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-comment-reagir-face-a-une-idee-irrealiste-en-brainstorming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Comment réagir face à une idée irréaliste en brainstorming ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-pourquoi-prototyper-en-basse-fidelite-plutot-que-construire-une-beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. Pourquoi prototyper en basse fidélité plutôt que construire une bêta ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-quelle-posture-adopter-pendant-les-tests-utilisateurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Quelle posture adopter pendant les tests utilisateurs ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-un-rejet-des-utilisateurs-signifie-t-il-lechec-du-projet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VII. Un rejet des utilisateurs signifie-t-il l'échec du projet ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii-pourquoi-travailler-en-equipe-pluridisciplinaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIII. Pourquoi travailler en équipe pluridisciplinaire ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ix-quelle-qualite-est-indispensable-pour-pratiquer-le-design-thinking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IX. Quelle qualité est indispensable pour pratiquer le Design Thinking ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x-quel-est-le-benefice-principal-pour-une-organisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        X. Quel est le bénéfice principal pour une organisation ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schemas-recapitulatifs-tout-le-design-thinking-en-un-coup-doeil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schémas récapitulatifs — Tout le Design Thinking en un coup d'oeil
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schémas récapitulatifs — Tout le Design Thinking en un coup d&#39;oeil">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-les-5-phases-cycle-iteratif-non-lineaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Les 5 phases — Cycle itératif non linéaire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-le-triangle-dequilibre-desirable-faisable-viable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Le triangle d'equilibre — Desirable / Faisable / Viable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-persona-pov-statement-de-lobservation-au-probleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Persona + POV Statement — De l'observation au problème
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-pensee-divergente-vs-pensee-convergente-le-moteur-de-lideation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Pensee divergente vs Pensee convergente — Le moteur de l'Ideation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-vue-densemble-flux-complet-dun-projet-design-thinking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Vue d'ensemble — Flux complet d'un projet Design Thinking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="design-thinking">Design Thinking<a class="headerlink" href="#design-thinking" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="i-quelle-est-la-philosophie-fondamentale-du-design-thinking">I. Quelle est la philosophie fondamentale du Design Thinking ?<a class="headerlink" href="#i-quelle-est-la-philosophie-fondamentale-du-design-thinking" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Pour vous, c'est quoi le Design Thinking et pourquoi est-ce différent d'une approche de gestion de projet classique ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Le Design Thinking est une méthodologie de résolution de problèmes qui place l'humain au centre de la réflexion. Contrairement aux approches classiques qui partent des contraintes techniques ou des objectifs business, le Design Thinking commence par l'empathie pour comprendre les besoins profonds, les frustrations et les comportements réels des utilisateurs.</p>
+<p>L'objectif est de s'assurer que la solution sera d'abord <strong>désirable pour l'humain</strong>, avant de valider si elle est <strong>faisable techniquement</strong> et <strong>viable économiquement</strong>. Ces trois critères forment le triangle d'équilibre de la bonne solution.</p>
+<p>La différence structurelle avec un projet classique : une approche traditionnelle pose d'abord la solution ("on va construire X"), puis tente de la vendre aux utilisateurs. Le Design Thinking pose d'abord la question ("quel est le vrai problème ?"), puis conçoit la solution en itérant avec les utilisateurs jusqu'à ce qu'elle fonctionne.</p>
+<hr />
+<h2 id="ii-pourquoi-lobservation-vaut-plus-quun-sondage">II. Pourquoi l'observation vaut plus qu'un sondage ?<a class="headerlink" href="#ii-pourquoi-lobservation-vaut-plus-quun-sondage" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Dans la phase d'Empathie, on dit souvent qu'il faut observer l'utilisateur dans son environnement. Pourquoi ne pas simplement lui envoyer un sondage ou lui demander directement ce qu'il veut ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Parce qu'il existe un décalage fondamental entre ce que les utilisateurs <strong>disent</strong> et ce qu'ils <strong>font</strong> réellement. Henry Ford l'illustrait bien : "Si j'avais demandé aux gens ce qu'ils voulaient, ils m'auraient répondu des chevaux plus rapides."</p>
+<p>Un sondage recueille des opinions conscientes et rationalisées. L'observation terrain — via des techniques comme le Shadowing (suivre l'utilisateur dans son environnement réel) ou les entretiens contextuels — révèle les besoins latents, les frustrations inconscientes et les comportements réels que l'utilisateur lui-même n'aurait pas pensé à mentionner.</p>
+<p><strong>Le risque du sondage seul</strong> : on construit une fonctionnalité techniquement parfaite qui répond à ce que l'utilisateur a dit vouloir, mais pas à ce dont il a réellement besoin. Le résultat est un produit inutilisé malgré l'investissement.</p>
+<p>Les outils clés de la phase d'empathie : entretiens ouverts, observation Shadowing, immersion, carte d'empathie (Empathy Map).</p>
+<hr />
+<h2 id="iii-comment-passer-dune-masse-dobservations-a-un-probleme-clair">III. Comment passer d'une masse d'observations à un problème clair ?<a class="headerlink" href="#iii-comment-passer-dune-masse-dobservations-a-un-probleme-clair" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Après la phase d'Empathie, on se retrouve souvent avec une montagne d'informations. Comment faites-vous pour ne pas vous éparpiller et choisir le bon problème à résoudre ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Pour transformer la masse d'informations en une direction claire, on utilise deux outils complémentaires.</p>
+<p><strong>Les Personas</strong> : fiches d'identité d'utilisateurs fictifs mais représentatifs, construites à partir des observations réelles. Un Persona synthétise le profil d'un segment d'utilisateurs — ses besoins, ses frustrations, ses habitudes, ses outils. Il sert de référence commune pour toute l'équipe : "Est-ce que cette solution résout vraiment le problème de Sophie ?"</p>
+<p><strong>Le Point of View (POV)</strong> : une fois les Personas définis, on formule la problématique précise sous la forme d'une question-cadre : "Comment pourrions-nous aider [Persona] à résoudre [Problème] afin de [Bénéfice attendu] ?" Cette formulation oriente toute la phase d'idéation sans contraindre les solutions possibles.</p>
+<p>Sans cette étape, on risque deux écueils : résoudre le mauvais problème (le symptôme plutôt que la cause), ou vouloir plaire à tout le monde sans satisfaire personne.</p>
+<hr />
+<h2 id="iv-comment-reagir-face-a-une-idee-irrealiste-en-brainstorming">IV. Comment réagir face à une idée irréaliste en brainstorming ?<a class="headerlink" href="#iv-comment-reagir-face-a-une-idee-irrealiste-en-brainstorming" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Pendant une séance de brainstorming, si un membre de l'équipe propose une idée qui semble totalement irréaliste ou trop coûteuse techniquement, comment devez-vous réagir ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>La règle d'or de l'idéation est de <strong>différer le jugement</strong>. On ne filtre pas les idées pendant la génération — on les accueille toutes, même les plus audacieuses.</p>
+<p><strong>Pourquoi</strong> : une idée apparemment irréaliste peut contenir une pépite utilisable, ou inspirer un autre membre de l'équipe à proposer une solution hybride que personne n'aurait trouvée autrement. Le jugement prématuré tue la créativité collective et ramène le groupe vers les solutions déjà connues.</p>
+<p><strong>La double dynamique</strong> : l'idéation fonctionne en deux temps distincts.
+- <strong>Pensée divergente</strong> (phase d'ouverture) : générer un maximum d'options sans filtre — quantité avant qualité.
+- <strong>Pensée convergente</strong> (phase de sélection) : évaluer les idées selon leur faisabilité et leur impact pour n'en retenir que quelques-unes à prototyper.</p>
+<p>Outils courants : brainstorming classique, Brainwriting (idées écrites en silence), méthode des 6 Chapeaux de De Bono, SCAMPER (Substitute, Combine, Adapt, Modify, Put to other uses, Eliminate, Reverse).</p>
+<hr />
+<h2 id="v-pourquoi-prototyper-en-basse-fidelite-plutot-que-construire-une-beta">V. Pourquoi prototyper en basse fidélité plutôt que construire une bêta ?<a class="headerlink" href="#v-pourquoi-prototyper-en-basse-fidelite-plutot-que-construire-une-beta" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Pourquoi faire un prototype basse fidélité (croquis, carton, interface simple sans code) plutôt que de construire directement une version bêta fonctionnelle ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>L'objectif du prototype basse-fidélité est d'<strong>échouer vite et pour pas cher</strong> (Fail fast, fail cheap). On valide les hypothèses fondamentales avant d'investir du temps et du budget de développement.</p>
+<p><strong>Réduction du risque</strong> : tester une idée avec un croquis de 10 minutes révèle les mêmes problèmes d'usage qu'un prototype fonctionnel codé en 3 semaines — mais à un coût marginal.</p>
+<p><strong>Libération du feedback</strong> : un utilisateur ose plus facilement critiquer un croquis maladroit qu'une application qui a l'air "finie". Face à un produit poli, il retient ses remarques pour ne pas blesser. Face à un croquis, il dit ce qu'il pense vraiment.</p>
+<p><strong>Itération rapide</strong> : modifier un wireframe papier prend 5 minutes. Modifier du code prend des heures. La basse fidélité permet de tester 5 concepts différents dans le temps qu'il faudrait pour en coder un.</p>
+<p><strong>Les niveaux de fidélité</strong> : Papier/Carton (idée brute) → Wireframe numérique (structure UX) → Maquette cliquable Figma (flux navigable) → Prototype fonctionnel (MVP à tester en conditions réelles).</p>
+<hr />
+<h2 id="vi-quelle-posture-adopter-pendant-les-tests-utilisateurs">VI. Quelle posture adopter pendant les tests utilisateurs ?<a class="headerlink" href="#vi-quelle-posture-adopter-pendant-les-tests-utilisateurs" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Pendant la phase de test, quelle posture devez-vous adopter face à l'utilisateur qui essaye votre prototype ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Je dois adopter une posture d'<strong>observateur neutre</strong>. Je ne guide pas, je n'explique pas, je n'aide pas l'utilisateur — même s'il bloque.</p>
+<p>Si l'utilisateur ne trouve pas un bouton ou ne comprend pas l'interface, ce n'est pas son problème : c'est une information précieuse sur une friction dans le design. Intervenir pour expliquer "comment ça marche" contamine les données et fausse les résultats.</p>
+<p><strong>Les bonnes questions</strong> : "Qu'est-ce que vous essayez de faire ?" ou "Qu'est-ce que vous vous attendiez à voir se passer ?" — des questions ouvertes qui révèlent le modèle mental de l'utilisateur sans l'orienter.</p>
+<p><strong>L'objectif du test</strong> : on ne cherche pas à valider que le prototype est bon. On cherche à découvrir où et pourquoi il échoue encore. Chaque moment de confusion est une opportunité d'amélioration, pas un échec.</p>
+<p><strong>Ce qu'on observe</strong> : les comportements (ce que l'utilisateur fait), les émotions (frustration, satisfaction, hésitation), et les verbalisations spontanées (ce qu'il dit sans qu'on lui demande).</p>
+<hr />
+<h2 id="vii-un-rejet-des-utilisateurs-signifie-t-il-lechec-du-projet">VII. Un rejet des utilisateurs signifie-t-il l'échec du projet ?<a class="headerlink" href="#vii-un-rejet-des-utilisateurs-signifie-t-il-lechec-du-projet" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Imaginons que les tests montrent que les utilisateurs n'aiment pas du tout votre solution. Est-ce que le projet est un échec ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Dans le Design Thinking, on ne parle pas d'<strong>échec</strong> mais d'<strong>apprentissage rapide</strong>. Si les utilisateurs n'adhèrent pas au prototype, c'est une excellente nouvelle : cela évite d'investir du budget de développement dans une mauvaise direction.</p>
+<p><strong>Le pivot</strong> : on utilise les retours pour ajuster l'angle — soit revenir à la phase d'Idéation pour explorer d'autres solutions, soit remonter à la phase de Définition si les tests révèlent que le problème était mal posé.</p>
+<p><strong>La non-linéarité du processus</strong> : le Design Thinking n'est pas une suite d'étapes à cocher dans l'ordre. On boucle constamment entre les phases selon ce qu'on apprend. Un test raté au cycle 1 qui nous fait revenir en Définition génère souvent l'insight qui mène à la solution finale au cycle 3.</p>
+<p>La vraie mesure du succès d'un atelier Design Thinking n'est pas "avons-nous trouvé LA solution ?" mais "avons-nous appris assez sur le problème pour ne pas construire quelque chose d'inutile ?"</p>
+<hr />
+<h2 id="viii-pourquoi-travailler-en-equipe-pluridisciplinaire">VIII. Pourquoi travailler en équipe pluridisciplinaire ?<a class="headerlink" href="#viii-pourquoi-travailler-en-equipe-pluridisciplinaire" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Pourquoi est-il conseillé de faire du Design Thinking en équipe mixte (développeurs, designers, commerciaux, experts métier) plutôt qu'entre experts d'un seul domaine ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>La pluridisciplinarité est une condition structurelle d'innovation, pas un détail organisationnel.</p>
+<p><strong>Fécondation croisée des idées</strong> : un développeur connaît les possibilités techniques qu'un commercial ne soupçonne pas. Un designer voit les frictions UX qu'un ingénieur ignore. Un expert métier connaît les contraintes réglementaires que personne d'autre ne maîtrise. L'intersection de ces perspectives génère des solutions que chaque silo aurait manquées seul.</p>
+<p><strong>Équilibre Désirable / Faisable / Viable</strong> : une équipe mono-disciplinaire optimise naturellement sur son propre axe — les ingénieurs font des solutions faisables mais pas nécessairement désirables, les commerciaux font des promesses viables mais pas toujours réalisables. L'équipe mixte force l'équilibre des trois dès la conception.</p>
+<p><strong>Adhésion collective</strong> : quand les parties prenantes participent à la co-construction de la solution, elles portent le projet avec conviction plutôt que de résister à une décision imposée.</p>
+<hr />
+<h2 id="ix-quelle-qualite-est-indispensable-pour-pratiquer-le-design-thinking">IX. Quelle qualité est indispensable pour pratiquer le Design Thinking ?<a class="headerlink" href="#ix-quelle-qualite-est-indispensable-pour-pratiquer-le-design-thinking" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Quelle est la qualité principale qu'un facilitateur ou un participant doit posséder pour réussir un atelier de Design Thinking ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>La qualité centrale est l'<strong>empathie active</strong>, combinée à trois attitudes complémentaires.</p>
+<p><strong>Curiosité sans jugement</strong> : aborder le problème avec un esprit de débutant (Beginner's Mind), capable de remettre en question les évidences et d'explorer des pistes inhabituelles sans les écarter d'emblée.</p>
+<p><strong>Détachement vis-à-vis de ses idées</strong> : ne pas "tomber amoureux" de sa solution. Être capable de l'abandonner ou de la transformer radicalement si les tests montrent qu'elle ne répond pas au besoin — même si on y a investi du temps et de l'énergie.</p>
+<p><strong>Tolérance à l'ambiguïté</strong> : accepter de naviguer dans l'incertitude sans avoir besoin de certitudes prématurées. Le processus est exploratoire par nature : on ne connaît pas la bonne réponse en commençant, et c'est précisément ce qui permet de trouver une solution vraiment nouvelle.</p>
+<hr />
+<h2 id="x-quel-est-le-benefice-principal-pour-une-organisation">X. Quel est le bénéfice principal pour une organisation ?<a class="headerlink" href="#x-quel-est-le-benefice-principal-pour-une-organisation" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Quel est le plus grand bénéfice pour une entreprise d'adopter le Design Thinking plutôt qu'une méthode de développement traditionnelle ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Le bénéfice principal est la <strong>réduction drastique du risque d'échec commercial</strong>, matérialisée par deux gains concrets.</p>
+<p><strong>Gain de temps</strong> : on ne développe pas de fonctionnalités dont personne ne veut. Les insights des tests de prototypes permettent d'éliminer très tôt les mauvaises pistes, avant qu'elles n'entrent en phase de développement.</p>
+<p><strong>Optimisation des coûts</strong> : les erreurs détectées sur un prototype papier coûtent presque rien à corriger. Les mêmes erreurs détectées après 6 mois de développement coûtent 100 fois plus. Le Design Thinking déplace le point de découverte des erreurs au moment où leur correction est la moins chère.</p>
+<p><strong>Impact culturel</strong> : au-delà d'un projet, adopter le Design Thinking transforme la culture d'une organisation — elle apprend à valider avant d'investir, à écouter les utilisateurs en continu, et à traiter l'incertitude comme une opportunité d'apprentissage plutôt qu'une menace.</p>
+<hr />
+<h2 id="schemas-recapitulatifs-tout-le-design-thinking-en-un-coup-doeil">Schémas récapitulatifs — Tout le Design Thinking en un coup d'oeil<a class="headerlink" href="#schemas-recapitulatifs-tout-le-design-thinking-en-un-coup-doeil" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="1-les-5-phases-cycle-iteratif-non-lineaire">1. Les 5 phases — Cycle itératif non linéaire<a class="headerlink" href="#1-les-5-phases-cycle-iteratif-non-lineaire" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : les 5 phases du Design Thinking et leur dynamique centrale. La flèche circulaire est la clé : le processus n'est pas une ligne droite A → B → C, mais un cycle où l'on revient en arrière selon ce qu'on apprend à chaque étape. Un test raté au step 5 peut renvoyer en step 2 (redéfinir le problème) ou en step 3 (explorer d'autres idées). L'itération est la feature, pas un bug. La vitesse d'apprentissage est ce qui compte, pas la progression linéaire.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>+-----------------------------------------------------------+
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>|                  DESIGN THINKING                          |
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>|               (processus iteratif)                        |
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>+-----------------------------------------------------------+
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  [1. EMPATHIE]  --&gt;  [2. DEFINITION]  --&gt;  [3. IDEATION]
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>       |                    |                     |
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  Observer            Synthetiser           Generer des
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  Ecouter             Personas              options (diverger)
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  Immerger            POV Statement         Sans jugement
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>       |                    |                     |
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>       +&lt;-------------------+&lt;--------------------+
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>       |           On revient en arriere           |
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>       |           si on decouvre que le           |
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>       |           probleme est mal pose           |
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>       |                                           |
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>       v                                           v
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>  [4. PROTOTYPE]  &lt;------  [5. TEST]
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>       |                       |
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>  Construire vite          Observer l&#39;utilisateur
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  Basse fidelite           Posture neutre
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>  &quot;Fail cheap&quot;             Capturer les frictions
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>       |                       |
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>       +-------&lt;-------+-------+
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>               |
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>           APPRENTISSAGE
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>           (echec = donnee)
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>               |
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>               v
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>       Nouveau cycle si besoin
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>       ou validation et passage
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>       au developpement complet
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>La regle : on peut sauter des etapes, revenir en arriere,
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>boucler autant que necessaire jusqu&#39;a trouver l&#39;adequation
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>solution &lt;--&gt; besoin utilisateur.
+</span></code></pre></div>
+<hr />
+<h3 id="2-le-triangle-dequilibre-desirable-faisable-viable">2. Le triangle d'equilibre — Desirable / Faisable / Viable<a class="headerlink" href="#2-le-triangle-dequilibre-desirable-faisable-viable" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : la condition nécessaire pour qu'une solution soit réellement bonne. Les trois cercles représentent trois contraintes : <strong>Désirable</strong> (l'utilisateur en a besoin et veut l'utiliser), <strong>Faisable</strong> (la technologie ou l'équipe peut le construire), <strong>Viable</strong> (le modèle économique tient). La zone idéale est l'intersection des trois. La plupart des projets qui échouent manquent un cercle : techniquement brillant mais personne ne le veut (faisable sans désirable), ou business case solide mais impossible à construire (viable sans faisable). Le Design Thinking commence par Désirable pour s'assurer qu'on ne construit jamais quelque chose d'inutile.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>                   DESIRABLE
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>                (Besoin humain reel)
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>                      /\
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>                     /  \
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>                    /    \
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>                   /  *** \
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>                  /  *   * \
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>                 / *  BON  * \
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>                / *  PRODUIT* \
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>               /  *   ***  *  \
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>              /    ***   ***    \
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>             /-------------------\
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>            /         /\         \
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>           /          /  \        \
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>          /          /    \        \
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>  FAISABLE     Technologie     VIABLE
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>(Techniquement  existante et  (Modele economique
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>  realisable)   maitrisee)     qui tient)
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>Erreurs classiques :
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>Desirable + Faisable, mais pas Viable
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>  --&gt; Super produit que personne ne peut monetiser
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>Faisable + Viable, mais pas Desirable
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>  --&gt; Produit brillant dont personne ne veut
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>Desirable + Viable, mais pas Faisable
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>  --&gt; Bonne idee, mais pas les moyens de la construire
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>Design Thinking : partir de DESIRABLE, puis
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>valider FAISABLE et VIABLE en iteration
+</span></code></pre></div>
+<hr />
+<h3 id="3-persona-pov-statement-de-lobservation-au-probleme">3. Persona + POV Statement — De l'observation au problème<a class="headerlink" href="#3-persona-pov-statement-de-lobservation-au-probleme" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : la transformation des données brutes d'observation en un problème actionnable. Les observations terrain sont riches mais diffuses — on ne peut pas "résoudre" 500 notes post-it. Les Personas synthétisent ces observations en profils utilisateurs représentatifs. Le POV Statement transforme le Persona en une question-cadre qui oriente toute la phase d'idéation sans contraindre les solutions. Retenir la formule exacte du POV : elle contient toujours un Qui (Persona), un Quoi (besoin ou problème), et un Pourquoi (insight, bénéfice attendu).</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>PHASE EMPATHIE                   PHASE DEFINITION
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>==============                   ================
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Donnees brutes :                 PERSONA
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>- 30 entretiens            --&gt;   +--------------------------------+
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>- 5 sessions Shadowing           | Nom : Sophie, 34 ans           |
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>- 200 observations               | Role : Responsable RH          |
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>- Enregistrements                | Frustration principale :        |
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>  audio/video                    |   &quot;Je passe 2h/jour a          |
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>                                 |    chercher des infos           |
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                                 |    dispersees dans 4 outils&quot;   |
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>                                 | Besoin : centralisation        |
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>                                 | Freins : manque de temps,      |
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>                                 |          resistance au changement|
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>                                 +--------------------------------+
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>                                        |
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>                                        v
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>                                 POV STATEMENT
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>                                 +--------------------------------+
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>                                 | Comment pourrions-nous         |
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>                                 |                                |
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>                                 | aider [Sophie, RH debordee]    |
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>                                 |                                |
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>                                 | a [retrouver rapidement        |
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>                                 |   les infos dont elle a besoin]|
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>                                 |                                |
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>                                 | afin de [gagner 1h par jour    |
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>                                 |   et reduire son stress]       |
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>                                 +--------------------------------+
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>                                        |
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>                                        v
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>                                 PHASE IDEATION
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>                                 &quot;Comment pourrions-nous...&quot; guide
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>                                 toutes les seances de brainstorming
+</span></code></pre></div>
+<hr />
+<h3 id="4-pensee-divergente-vs-pensee-convergente-le-moteur-de-lideation">4. Pensee divergente vs Pensee convergente — Le moteur de l'Ideation<a class="headerlink" href="#4-pensee-divergente-vs-pensee-convergente-le-moteur-de-lideation" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : pourquoi l'idéation fonctionne en deux temps distincts qu'il ne faut surtout pas mélanger. La pensée divergente (ouverture) et la pensée convergente (fermeture) sont des modes cognitifs opposés — essayer de faire les deux en même temps tue l'un ou l'autre. La règle d'or : séparer physiquement les deux phases, même par une simple pause. Ne jamais évaluer pendant qu'on génère.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PENSEE DIVERGENTE               PENSEE CONVERGENTE
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>(generer)                       (selectionner)
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>=================               ==================
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>But : quantite               But : qualite
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>Regle : PAS de jugement      Regle : evaluer et choisir
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>Tous les participants        Vote sur les idees
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>ecrivent en silence          (dot voting : chaque personne
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>(Brainwriting)               place 3 points sur ses
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                             idees preferees)
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>  Idee 1                          |
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>  Idee 2            --&gt;           v
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>  Idee 3      mur              TOP 3 IDEES
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>  Idee 4     d&#39;idees           a prototyper
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>  Idee 5                          |
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>  ...                             v
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>  Idee 50        Criteres de selection :
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>                 - Impact sur le Persona
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>                 - Faisabilite technique
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>                 - Viabilite economique
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>                 - Originalite
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>IMPORTANT : les deux phases sont separees
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>  --&gt; Diverger en premier (20-30 min, sans filtre)
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>  --&gt; Puis seulement converger (15-20 min, avec criteres)
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>  --&gt; Ne jamais evaluer pendant qu&#39;on genere
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>Outils divergents :         Outils convergents :
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>Brainstorming               Matrice Impact / Effort
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>Brainwriting 6-3-5          Dot voting
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>SCAMPER                     Criteres ponderes
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>Analogies / Metaphores      Priorisation MoSCoW
+</span></code></pre></div>
+<hr />
+<h3 id="5-vue-densemble-flux-complet-dun-projet-design-thinking">5. Vue d'ensemble — Flux complet d'un projet Design Thinking<a class="headerlink" href="#5-vue-densemble-flux-complet-dun-projet-design-thinking" title="Permanent link">&para;</a></h3>
+<p><strong>Ce que montre ce schéma</strong> : un projet Design Thinking de bout en bout, avec les livrables concrets à chaque étape. Ce schéma est celui à citer en entretien pour montrer qu'on sait appliquer la méthode en conditions réelles. À retenir : chaque phase produit un livrable tangible (Empathy Map, Personas, POV, idées priorisées, prototype, rapport de test), et chaque livrable alimente la phase suivante. La colonne de droite indique quand revenir en arrière selon ce qu'on découvre.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ETAPE            ACTIVITES                LIVRABLES            RETOUR EN ARRIERE
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>==========       ===================      ============         =================
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>1. EMPATHIE      - Entretiens ouverts     Empathy Map          --
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>                 - Shadowing              (Pense / Ressent /
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>                 - Immersion              Entend / Voit)
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        |
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        v
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>2. DEFINITION    - Synthese des donnees   Personas             Si insights
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>                 - Identification         POV Statement        insuffisants
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>                 - &quot;Comment pourrions-    &quot;HMW questions&quot;      --&gt; retour
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>                   nous...&quot;                                     Empathie
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>        |
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        v
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>3. IDEATION      - Brainstorming          100+ idees           Si aucune idee
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>                 - Brainwriting           3 idees              prometteuse
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>                 - Vote et selection      selectionnees        --&gt; relire POV
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>                                                               redefini
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>        |
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>        v
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>4. PROTOTYPE     - Croquis papier         Prototype            Si prototype
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>                 - Wireframe              basse fidelite       incoherent
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>                 - Maquette cliquable     (testable en 1h)     --&gt; retour
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>                                                               Ideation
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>        |
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>        v
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>5. TEST          - Observation neutre     Rapport de test      Si rejet massif
+</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>                 - &quot;Think Aloud&quot;          Insights utilisateur --&gt; retour
+</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>                 - Questions ouvertes     Frictions identifiees Definition
+</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>                                                               ou Ideation
+</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>
+</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>        |
+</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>        v
+</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>
+</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>DECISION FINALE
+</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>===============
+</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>
+</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>Tests concluants ?          Tests negatifs ?
+</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>       |                           |
+</span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a>       v                           v
+</span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>  Passage au                  Nouveau cycle
+</span><span id="__span-4-50"><a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a>  developpement               (pivot sur une
+</span><span id="__span-4-51"><a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a>  complet (MVP)               autre solution)
+</span><span id="__span-4-52"><a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a>
+</span><span id="__span-4-53"><a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a>
+</span><span id="__span-4-54"><a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>CYCLE COMPLET : 2 a 5 jours en Sprint intensif
+</span><span id="__span-4-55"><a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a>               ou plusieurs semaines en mode projet iteratif
+</span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
+        
+          
+          <a href="../aws/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: AWS">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Précédent
+              </span>
+              <div class="md-ellipsis">
+                AWS
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../sgbd/" class="md-footer__link md-footer__link--next" aria-label="Suivant: SGBD">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Suivant
+              </span>
+              <div class="md-ellipsis">
+                SGBD
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="#" target="_blank" rel="noopener" title="LinkedIn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.footer", "navigation.indexes", "search.highlight", "search.suggest", "search.share", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

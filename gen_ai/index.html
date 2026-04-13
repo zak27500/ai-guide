@@ -1,0 +1,1189 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Fiches de révision techniques — GenAI, LangChain, LangGraph, AWS, Design Thinking">
+      
+      
+      
+      
+        <link rel="prev" href="../oop/">
+      
+      
+        <link rel="next" href="../langchain/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>GenAI - AI Engineer Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#genai" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href=".." title="AI Engineer Guide" class="md-header__button md-logo" aria-label="AI Engineer Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Engineer Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GenAI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan"  aria-label="Passer en mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer en mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="deep-purple"  aria-label="Passer en mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer en mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Partager" aria-label="Partager" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../python/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../oop/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  OOP & Génie Logiciel
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  GenAI
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../langchain/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  LangChain
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../langgraph/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  LangGraph
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../aws/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  AWS
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../design_thinking/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Design Thinking
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../sgbd/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  SGBD
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="AI Engineer Guide" class="md-nav__button md-logo" aria-label="AI Engineer Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.33 12.91c.09 1.55-.62 3.04-1.89 3.95l.77 1.49c.23.45.26.98.06 1.45-.19.47-.58.84-1.06 1l-.79.25a1.687 1.687 0 0 1-1.86-.55L14.44 18c-.89-.15-1.73-.53-2.44-1.1-.5.15-1 .23-1.5.23-.88 0-1.76-.27-2.5-.79-.53.16-1.07.23-1.62.22-.79.01-1.57-.15-2.3-.45a4.1 4.1 0 0 1-2.43-3.61c-.08-.72.04-1.45.35-2.11-.29-.75-.32-1.57-.07-2.33C2.3 7.11 3 6.32 3.87 5.82c.58-1.69 2.21-2.82 4-2.7 1.6-1.5 4.05-1.66 5.83-.37.42-.11.86-.17 1.3-.17 1.36-.03 2.65.57 3.5 1.64 2.04.53 3.5 2.35 3.58 4.47.05 1.11-.25 2.2-.86 3.13.07.36.11.72.11 1.09m-5-1.41c.57.07 1.02.5 1.02 1.07a1 1 0 0 1-1 1h-.63c-.32.9-.88 1.69-1.62 2.29.25.09.51.14.77.21 5.13-.07 4.53-3.2 4.53-3.25a2.59 2.59 0 0 0-2.69-2.49 1 1 0 0 1-1-1 1 1 0 0 1 1-1c1.23.03 2.41.49 3.33 1.3.05-.29.08-.59.08-.89-.06-1.24-.62-2.32-2.87-2.53-1.25-2.96-4.4-1.32-4.4-.4-.03.23.21.72.25.75a1 1 0 0 1 1 1c0 .55-.45 1-1 1-.53-.02-1.03-.22-1.43-.56-.48.31-1.03.5-1.6.56-.57.05-1.04-.35-1.07-.9a.97.97 0 0 1 .88-1.1c.16-.02.94-.14.94-.77 0-.66.25-1.29.68-1.79-.92-.25-1.91.08-2.91 1.29C6.75 5 6 5.25 5.45 7.2 4.5 7.67 4 8 3.78 9c1.08-.22 2.19-.13 3.22.25.5.19.78.75.59 1.29-.19.52-.77.78-1.29.59-.73-.32-1.55-.34-2.3-.06-.32.27-.32.83-.32 1.27 0 .74.37 1.43 1 1.83.53.27 1.12.41 1.71.4q-.225-.39-.39-.81a1.038 1.038 0 0 1 1.96-.68c.4 1.14 1.42 1.92 2.62 2.05 1.37-.07 2.59-.88 3.19-2.13.23-1.38 1.34-1.5 2.56-1.5m2 7.47-.62-1.3-.71.16 1 1.25zm-4.65-8.61a1 1 0 0 0-.91-1.03c-.71-.04-1.4.2-1.93.67-.57.58-.87 1.38-.84 2.19a1 1 0 0 0 1 1c.57 0 1-.45 1-1 0-.27.07-.54.23-.76.12-.1.27-.15.43-.15.55.03 1.02-.38 1.02-.92"/></svg>
+
+    </a>
+    AI Engineer Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OOP & Génie Logiciel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GenAI
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GenAI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Sur cette page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sur cette page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-pourquoi-ne-pas-simplement-mettre-tous-les-documents-dans-le-contexte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Pourquoi ne pas simplement mettre tous les documents dans le contexte ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-quest-ce-qui-determine-reellement-la-qualite-dune-reponse-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Qu'est-ce qui détermine réellement la qualité d'une réponse RAG ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-comment-gerer-une-question-qui-necessite-plusieurs-outils-successifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. Comment gérer une question qui nécessite plusieurs outils successifs ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-comment-garantir-quune-ia-ne-va-pas-halluciner-en-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Comment garantir qu'une IA ne va pas halluciner en production ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-fine-tuning-ou-rag-comment-choisir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. Fine-tuning ou RAG — comment choisir ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-comment-optimiser-la-latence-et-le-debit-en-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Comment optimiser la latence et le débit en production ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-quel-est-lavantage-du-mecanisme-de-self-attention-sur-les-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VII. Quel est l'avantage du mécanisme de Self-Attention sur les RNN ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii-comment-le-transformer-connait-il-lordre-des-mots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIII. Comment le Transformer connaît-il l'ordre des mots ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ix-pourquoi-avoir-separe-encoder-et-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IX. Pourquoi avoir séparé Encoder et Decoder ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x-comment-controler-le-niveau-de-creativite-dun-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        X. Comment contrôler le niveau de créativité d'un LLM ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../langchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LangChain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../langgraph/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LangGraph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design_thinking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Thinking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SGBD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Sur cette page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sur cette page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-pourquoi-ne-pas-simplement-mettre-tous-les-documents-dans-le-contexte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I. Pourquoi ne pas simplement mettre tous les documents dans le contexte ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-quest-ce-qui-determine-reellement-la-qualite-dune-reponse-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        II. Qu'est-ce qui détermine réellement la qualité d'une réponse RAG ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-comment-gerer-une-question-qui-necessite-plusieurs-outils-successifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        III. Comment gérer une question qui nécessite plusieurs outils successifs ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-comment-garantir-quune-ia-ne-va-pas-halluciner-en-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IV. Comment garantir qu'une IA ne va pas halluciner en production ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-fine-tuning-ou-rag-comment-choisir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V. Fine-tuning ou RAG — comment choisir ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-comment-optimiser-la-latence-et-le-debit-en-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VI. Comment optimiser la latence et le débit en production ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vii-quel-est-lavantage-du-mecanisme-de-self-attention-sur-les-rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VII. Quel est l'avantage du mécanisme de Self-Attention sur les RNN ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viii-comment-le-transformer-connait-il-lordre-des-mots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIII. Comment le Transformer connaît-il l'ordre des mots ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ix-pourquoi-avoir-separe-encoder-et-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IX. Pourquoi avoir séparé Encoder et Decoder ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x-comment-controler-le-niveau-de-creativite-dun-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        X. Comment contrôler le niveau de créativité d'un LLM ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="genai">GenAI<a class="headerlink" href="#genai" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="i-pourquoi-ne-pas-simplement-mettre-tous-les-documents-dans-le-contexte">I. Pourquoi ne pas simplement mettre tous les documents dans le contexte ?<a class="headerlink" href="#i-pourquoi-ne-pas-simplement-mettre-tous-les-documents-dans-le-contexte" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "On entend souvent parler de la fenêtre de contexte et des Tokens. Pourquoi est-il risqué d'augmenter la taille du contexte à l'infini pour donner tous les documents au modèle d'un coup, plutôt que d'utiliser une architecture plus complexe ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>L'utilisation d'une fenêtre de contexte massive présente trois risques majeurs.</p>
+<p><strong>Dégradation de l'attention (Lost in the Middle)</strong> : les recherches montrent que les modèles mémorisent mieux les informations situées au début et à la fin du prompt. Plus le milieu est dense, plus le risque d'omettre une information cruciale est élevé — même si elle est techniquement présente dans le contexte.</p>
+<p><strong>Explosion des coûts et de la latence</strong> : le coût de l'inférence est proportionnel au nombre de tokens traités. Un contexte saturé ralentit considérablement le Time To First Token (TTFT), ce qui dégrade directement l'expérience utilisateur en production.</p>
+<p><strong>Bruit informationnel</strong> : injecter des données non pertinentes augmente le risque d'hallucinations, car le modèle peut établir des corrélations erronées entre informations qui n'auraient pas dû être traitées ensemble.</p>
+<p>C'est pourquoi on privilégie des architectures RAG (Retrieval-Augmented Generation) pour ne fournir au modèle que les fragments strictement nécessaires à chaque requête.</p>
+<hr />
+<h2 id="ii-quest-ce-qui-determine-reellement-la-qualite-dune-reponse-rag">II. Qu'est-ce qui détermine réellement la qualité d'une réponse RAG ?<a class="headerlink" href="#ii-quest-ce-qui-determine-reellement-la-qualite-dune-reponse-rag" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Dans un pipeline RAG classique, on transforme nos documents en vecteurs pour les stocker. Mais qu'est-ce qui détermine la qualité de la réponse finale : est-ce uniquement la puissance du LLM, ou y a-t-il une étape cruciale avant que le LLM ne reçoive la question ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>La qualité d'un RAG dépend en premier lieu de la précision de la phase de <strong>Retrieval</strong>. Si le contexte récupéré est bruité ou hors sujet, même le meilleur LLM produira une réponse médiocre ou hallucinera — le modèle ne peut pas corriger ce qu'on ne lui a pas donné.</p>
+<p><strong>Optimisation du Retrieval</strong> : l'approche hybride Bi-Encoder + Cross-Encoder est la référence. Le Bi-Encoder (recherche vectorielle) offre une grande scalabilité mais manque parfois de nuance sémantique. Le Cross-Encoder agit comme un filtre de précision : il reclasse les résultats en traitant simultanément la requête et le document, capturant mieux les interactions complexes — au prix d'une latence plus élevée.</p>
+<p><strong>Fiabilisation de la génération</strong> : pour limiter les hallucinations, on contraint le LLM via le Prompt Engineering ("Réponds uniquement en utilisant le contexte fourni") et le Few-Shot Prompting pour ancrer le format attendu.</p>
+<p><strong>Évaluation continue</strong> : un système LLM-as-a-Judge — souvent un modèle plus petit (SLM) spécialisé — vérifie en temps réel la fidélité de la réponse par rapport au contexte (Faithfulness) et sa pertinence par rapport à la question (Relevance).</p>
+<hr />
+<h2 id="iii-comment-gerer-une-question-qui-necessite-plusieurs-outils-successifs">III. Comment gérer une question qui nécessite plusieurs outils successifs ?<a class="headerlink" href="#iii-comment-gerer-une-question-qui-necessite-plusieurs-outils-successifs" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Un RAG classique est souvent 'statique' : il cherche, puis il répond. Comment feriez-vous si l'utilisateur pose une question qui nécessite plusieurs recherches successives, ou de consulter un outil externe (API météo, calculateur) avant de répondre ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Pour des besoins multi-étapes ou nécessitant des outils externes, on utilise des <strong>Agents IA</strong> basés sur le pattern <strong>ReAct (Reason + Act)</strong>.</p>
+<p><strong>Fonctionnement</strong> : l'agent reçoit une boîte à outils (Toolbelt). À chaque itération, il analyse l'état actuel, décide de l'outil à appeler, traite le résultat, et ré-évalue s'il dispose d'assez d'informations pour répondre ou s'il doit continuer à itérer.</p>
+<p><strong>Choix d'orchestration</strong> : pour une logique complexe avec des cycles et de la persistance d'état, LangGraph est adapté — il offre un contrôle fin sur les transitions et le checkpointing. Pour une application en production où la latence et le débogage sont critiques, coder l'orchestration from scratch via le Function Calling natif des LLM est souvent plus pertinent : cela évite les abstractions qui peuvent masquer des erreurs ou complexifier inutilement le code.</p>
+<p><strong>Limite structurelle</strong> : sans mécanisme de limite d'itérations (<code>max_iterations</code>), un agent peut boucler indéfiniment. En production, on impose toujours un plafond d'itérations et une gestion explicite des cas d'erreur.</p>
+<hr />
+<h2 id="iv-comment-garantir-quune-ia-ne-va-pas-halluciner-en-production">IV. Comment garantir qu'une IA ne va pas halluciner en production ?<a class="headerlink" href="#iv-comment-garantir-quune-ia-ne-va-pas-halluciner-en-production" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "C'est bien beau d'avoir un agent qui utilise des outils, mais comment pouvez-vous garantir à un client que votre IA ne va pas inventer une information ou utiliser un outil de manière erronée ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Pour garantir la fiabilité d'un système GenAI, on déploie une stratégie d'évaluation à plusieurs niveaux — aucun niveau seul n'est suffisant.</p>
+<p><strong>La Triade RAG</strong> : trois métriques complémentaires mesurées automatiquement via des frameworks comme Ragas ou TruLens.
+- <strong>Faithfulness</strong> : la réponse est-elle ancrée dans le contexte fourni, ou le modèle invente-t-il ?
+- <strong>Context Relevance</strong> : le retriever a-t-il récupéré les bons documents ?
+- <strong>Answer Relevance</strong> : la réponse répond-elle réellement à la question posée ?</p>
+<p><strong>LLM-as-a-Judge</strong> : un modèle supérieur (ou un SLM spécialisé) évalue les sorties selon des critères précis — toxicité, ton, exactitude factuelle. Scalable et automatisable, il permet une surveillance continue sans coût humain constant.</p>
+<p><strong>Human-in-the-Loop (HITL)</strong> : pour les décisions critiques (juridiques, médicales, financières), l'humain intervient comme validateur final. L'IA propose, l'humain dispose. Ce mécanisme sert doublement : sécuriser la décision et collecter des données de feedback pour améliorer le modèle en continu (RLHF).</p>
+<p>L'objectif est un <strong>Guardrail multicouche</strong> où les métriques automatiques filtrent les cas standards, et la validation humaine couvre les cas limites où les métriques atteignent leurs limites.</p>
+<hr />
+<h2 id="v-fine-tuning-ou-rag-comment-choisir">V. Fine-tuning ou RAG — comment choisir ?<a class="headerlink" href="#v-fine-tuning-ou-rag-comment-choisir" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Si mon modèle ne connaît pas assez bien le jargon technique spécifique de mon entreprise, est-ce que je devrais lancer un Fine-tuning sur mes données ou rester sur un RAG ? Quels sont les critères de décision ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Le choix dépend de ce qu'on veut changer : la <strong>connaissance</strong> ou le <strong>comportement</strong> du modèle.</p>
+<p><strong>RAG</strong> : idéal pour fournir des faits à jour et réduire les hallucinations sur des données documentaires. La base de connaissances est modifiable à tout moment sans réentraînement. C'est la solution pour la connaissance factuelle.</p>
+<p><strong>Fine-tuning</strong> : indispensable pour que le modèle adopte un jargon technique précis, un format de réponse strict, un ton ou une "voix" spécifique, ou des comportements qui ne peuvent pas être injectés via le prompt. C'est la solution pour le comportement.</p>
+<p><strong>Les deux combinés</strong> : dans les cas exigeants, on fait du Fine-tuning pour le comportement + du RAG pour la connaissance — le modèle sait comment parler, et le RAG lui fournit quoi dire.</p>
+<p><strong>Optimisation du Fine-tuning</strong> : pour contrôler les coûts GPU, on utilise le PEFT (Parameter-Efficient Fine-Tuning) via <strong>LoRA</strong> — on insère des adaptateurs de rang faible (matrices A et B) dans les couches denses, et on n'entraîne qu'une fraction des paramètres totaux. Si les ressources sont très limitées, <strong>QLoRA</strong> ajoute une quantification en 4-bit NormalFloat (NF4) qui réduit l'empreinte mémoire de façon drastique tout en préservant les performances, permettant de fine-tuner des modèles massifs sur du matériel grand public.</p>
+<hr />
+<h2 id="vi-comment-optimiser-la-latence-et-le-debit-en-production">VI. Comment optimiser la latence et le débit en production ?<a class="headerlink" href="#vi-comment-optimiser-la-latence-et-le-debit-en-production" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Une fois que vous avez votre modèle fine-tuné ou votre pipeline RAG, comment gérez-vous le compromis entre la latence (vitesse de réponse) et le débit (nombre d'utilisateurs simultanés) ? Quels outils ou techniques de compression de modèle pourriez-vous utiliser ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Pour optimiser l'inférence en production (AWS Bedrock, SageMaker, ou endpoint custom), on agit sur quatre leviers complémentaires.</p>
+<p><strong>Distillation de connaissances (Knowledge Distillation)</strong> : on entraîne un modèle plus petit (l'élève) à reproduire les probabilités de sortie d'un modèle plus large (le professeur). Résultat : un modèle avec beaucoup moins de paramètres qui conserve une grande partie des capacités de raisonnement du modèle original.</p>
+<p><strong>Élagage (Pruning)</strong> : on supprime les connexions ou les poids les moins utiles dans le réseau de neurones pour alléger le modèle sans dégrader significativement ses performances.</p>
+<p><strong>Quantification (Post-Training Quantization)</strong> : réduire la précision des poids (de FP32/FP16 vers INT8 ou INT4) réduit l'empreinte mémoire et accélère les calculs sur GPU/NPU. C'est la même technique que QLoRA, appliquée à l'inférence.</p>
+<p><strong>Speculative Decoding</strong> : un petit modèle très rapide génère une ébauche de réponse, que le grand modèle (plus lent mais plus précis) valide ou corrige en une seule passe. Cela réduit considérablement la latence perçue par l'utilisateur sans sacrifier la qualité finale.</p>
+<hr />
+<h2 id="vii-quel-est-lavantage-du-mecanisme-de-self-attention-sur-les-rnn">VII. Quel est l'avantage du mécanisme de Self-Attention sur les RNN ?<a class="headerlink" href="#vii-quel-est-lavantage-du-mecanisme-de-self-attention-sur-les-rnn" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Quel est l'avantage technique majeur du mécanisme de Self-Attention des Transformers par rapport au traitement séquentiel des anciens modèles (RNN/LSTM), notamment en termes d'entraînement et de compréhension du contexte ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Avant les Transformers, les RNN et LSTM traitaient les mots un par un, dans l'ordre séquentiel. Ce traitement séquentiel posait deux problèmes majeurs.</p>
+<p><strong>Disparition du gradient</strong> : sur des séquences longues, les informations du début de la phrase avaient du mal à atteindre la fin de la chaîne de traitement — le modèle "oubliait" le contexte lointain.</p>
+<p><strong>Impossibilité de paralléliser</strong> : puisque chaque mot attendait le résultat du mot précédent, l'entraînement ne pouvait pas exploiter la puissance des GPU modernes pour traiter plusieurs tokens simultanément.</p>
+<p><strong>L'apport du Self-Attention</strong> : le mécanisme Query-Key-Value permet à chaque token de calculer sa relation avec tous les autres tokens de la séquence en une seule opération matricielle — quelle que soit leur distance. "Le chat que j'ai vu hier mange" : le verbe "mange" peut être relié directement à "chat" sans passer par tous les mots intermédiaires.</p>
+<p><strong>L'Attention Multi-Têtes</strong> : au lieu d'un seul regard global, le modèle divise son attention en plusieurs têtes indépendantes, chacune spécialisée sur un aspect différent — relations syntaxiques (sujet-verbe), relations sémantiques (désambiguïsation), dépendances lointaines (pronom et référent). La combinaison des têtes produit une représentation beaucoup plus riche qu'une attention unique.</p>
+<hr />
+<h2 id="viii-comment-le-transformer-connait-il-lordre-des-mots">VIII. Comment le Transformer connaît-il l'ordre des mots ?<a class="headerlink" href="#viii-comment-le-transformer-connait-il-lordre-des-mots" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Si je dis 'Le chat mange la souris' ou 'La souris mange le chat', les mots sont les mêmes. Sans mécanisme spécial, le Transformer les verrait comme un simple sac de mots identique. Comment fait-il pour connaître l'ordre ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Puisque le Transformer traite tous les tokens simultanément (parallélisme), il perd naturellement la notion d'ordre séquentiel. Pour compenser, on utilise l'<strong>Encodage Positionnel (Positional Encoding)</strong>.</p>
+<p>On ajoute à chaque vecteur de mot (embedding) un signal mathématique unique — dans le papier original "Attention Is All You Need", des fonctions sinus et cosinus à différentes fréquences — qui encode la position précise du token dans la séquence.</p>
+<p>Grâce à cela, le vecteur représentant "chat" en position 2 est différent du vecteur "chat" en position 5. Le modèle peut donc distinguer "Le chat mange la souris" de "La souris mange le chat", même en traitant tous les mots en parallèle.</p>
+<p>Les modèles plus récents utilisent des variantes comme le <strong>RoPE (Rotary Positional Embedding)</strong> ou l'<strong>ALiBi</strong>, qui gèrent mieux l'extrapolation vers des séquences plus longues que celles vues à l'entraînement.</p>
+<hr />
+<h2 id="ix-pourquoi-avoir-separe-encoder-et-decoder">IX. Pourquoi avoir séparé Encoder et Decoder ?<a class="headerlink" href="#ix-pourquoi-avoir-separe-encoder-et-decoder" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Aujourd'hui, les modèles comme GPT sont appelés 'Decoder-only', tandis que BERT est 'Encoder-only'. Pourquoi a-t-on fini par séparer ces deux parties au lieu de toujours utiliser le Transformer complet ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>L'architecture Encoder-Decoder originale (Transformer complet) était conçue pour la traduction — transformer une séquence source en une séquence cible. Pour d'autres tâches, chaque moitié s'est révélée plus efficace seule.</p>
+<p><strong>Encoder (ex : BERT)</strong> — bidirectionnel : il voit toute la phrase d'un coup dans les deux directions (gauche et droite). Cela produit des représentations contextuelles riches, idéales pour des tâches de <strong>compréhension</strong> — classification, extraction d'entités, similarité sémantique. L'entraînement se fait par Masked Language Modeling (MLM) : certains tokens sont masqués, le modèle apprend à les prédire en s'appuyant sur tout le contexte environnant.</p>
+<p><strong>Decoder (ex : GPT)</strong> — unidirectionnel (causal) : lors de l'entraînement, il n'a pas le droit de voir les tokens "du futur" — un masque (causal mask) bloque l'attention vers la droite. Il apprend à prédire le token suivant uniquement à partir du passé. C'est ce qui le rend performant pour la <strong>génération</strong> — complétion de texte, code, dialogue. Permettre au modèle de voir le futur pendant l'entraînement le ferait "tricher" et l'empêcherait d'apprendre à générer.</p>
+<p><strong>En résumé</strong> : Encoder = comprendre, Decoder = générer. Les LLM modernes (GPT, Claude, Llama) sont tous Decoder-only, car la génération auto-régressive est le paradigme dominant.</p>
+<hr />
+<h2 id="x-comment-controler-le-niveau-de-creativite-dun-llm">X. Comment contrôler le niveau de créativité d'un LLM ?<a class="headerlink" href="#x-comment-controler-le-niveau-de-creativite-dun-llm" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Parfois l'IA est trop répétitive, et parfois elle part dans tous les sens. Quels paramètres permettent de régler ce niveau de créativité ou de déterminisme lors des appels API ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Le contrôle du comportement de génération repose sur deux paramètres clés.</p>
+<p><strong>Température</strong> : elle module la distribution de probabilité sur les tokens candidats. Une température de <code>0</code> rend le modèle "greedy" — il choisit toujours le token le plus probable, ce qui garantit des réponses reproductibles et précises, idéal pour du code ou des calculs. Une température élevée (<code>0.8</code>-<code>1.0</code>) aplatit la distribution, donnant une chance à des tokens moins probables — cela favorise la créativité et la variété, au risque d'incohérence.</p>
+<p><strong>Top-P (Nucleus Sampling)</strong> : au lieu de considérer tous les tokens possibles, on ne considère que le plus petit ensemble dont la probabilité cumulée atteint P (ex : <code>0.9</code>). Cela filtre les tokens totalement hors sujet tout en conservant une diversité contrôlée. Combiné à une température modérée, c'est le réglage le plus courant en production.</p>
+<p><strong>Top-K</strong> : variante qui limite le choix aux K tokens les plus probables (ex : Top-K=50). Moins flexible que Top-P car il ne s'adapte pas à la distribution réelle du modèle.</p>
+<p><strong>Règles pratiques</strong> :
+- Code, SQL, réponses factuelles : <code>temperature=0</code>, <code>top_p=1</code>
+- Chatbot conversationnel : <code>temperature=0.7</code>, <code>top_p=0.9</code>
+- Génération créative (storytelling) : <code>temperature=0.9</code>, <code>top_p=0.95</code>
+- Ne jamais fixer temperature ET top_p à des valeurs extrêmes simultanément.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
+        
+          
+          <a href="../oop/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: OOP &amp; Génie Logiciel">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Précédent
+              </span>
+              <div class="md-ellipsis">
+                OOP & Génie Logiciel
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../langchain/" class="md-footer__link md-footer__link--next" aria-label="Suivant: LangChain">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Suivant
+              </span>
+              <div class="md-ellipsis">
+                LangChain
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="#" target="_blank" rel="noopener" title="LinkedIn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.footer", "navigation.indexes", "search.highlight", "search.suggest", "search.share", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
