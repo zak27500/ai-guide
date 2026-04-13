@@ -178,3 +178,212 @@ Le contrôle du comportement de génération repose sur deux paramètres clés.
 - Chatbot conversationnel : `temperature=0.7`, `top_p=0.9`
 - Génération créative (storytelling) : `temperature=0.9`, `top_p=0.95`
 - Ne jamais fixer temperature ET top_p à des valeurs extrêmes simultanément.
+
+---
+
+## XI. Qu'est-ce que le preprocessing NLP et pourquoi est-il indispensable ?
+
+**Question** : "Avant d'alimenter un modèle ou un moteur de recherche avec du texte brut, quelles étapes de prétraitement appliquez-vous et pourquoi ?"
+
+**Réponse** :
+
+Le **preprocessing NLP** est la chaîne de transformations appliquées au texte brut pour le rendre exploitable par un modèle ou un algorithme. Un texte mal préparé produit des représentations bruitées qui dégradent toutes les étapes suivantes.
+
+**Les étapes classiques dans l'ordre** :
+
+**Nettoyage** : suppression des balises HTML, des caractères spéciaux, de la ponctuation non significative, normalisation des espaces et des encodages.
+
+**Lowercasing** : mise en minuscules pour que "Paris" et "paris" soient traités comme le même token. À désactiver si la casse est sémantiquement significative (NER, acronymes).
+
+**Tokenisation** : découpage du texte en unités atomiques (tokens). Peut se faire au niveau mot, sous-mot (BPE, WordPiece — utilisé par BERT/GPT), ou caractère.
+
+```python
+from transformers import AutoTokenizer
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+tokens = tokenizer("Le RAG améliore les LLM")
+# ['le', 'rag', 'améliore', 'les', 'll', '##m']
+```
+
+**Stopwords** : suppression des mots très fréquents et peu informatifs (le, la, de, et...). Utile pour TF-IDF et la recherche classique, mais souvent inutile pour les LLM qui ont déjà appris à les pondérer.
+
+**Stemming / Lemmatisation** : réduction d'un mot à sa racine.
+- Stemming (rapide, brutal) : "mangeait" → "mang"
+- Lemmatisation (plus précise, contextualisée) : "mangeait" → "manger"
+
+**Pourquoi moins critique avec les LLM** : les modèles comme BERT ou GPT ont été entraînés sur du texte brut et gèrent nativement la morphologie, les stopwords et la casse. Le preprocessing reste indispensable pour la recherche vectorielle (qualité des embeddings), les modèles classiques (TF-IDF, SVM), et la réduction du bruit dans les pipelines RAG.
+
+---
+
+## XII. Qu'est-ce que TF-IDF et comment mesure-t-il la pertinence d'un terme ?
+
+**Question** : "Expliquez le principe de TF-IDF. Comment permet-il de distinguer un terme important d'un terme fréquent mais peu informatif ?"
+
+**Réponse** :
+
+**TF-IDF (Term Frequency — Inverse Document Frequency)** est une mesure statistique qui quantifie l'importance d'un mot dans un document par rapport à une collection de documents (corpus).
+
+**TF — Term Frequency** : fréquence brute d'un terme dans un document. Plus un mot apparaît dans le document, plus son TF est élevé.
+
+```
+TF(t, d) = nombre d'occurrences de t dans d / nombre total de mots dans d
+```
+
+**IDF — Inverse Document Frequency** : pénalise les termes qui apparaissent dans beaucoup de documents (donc peu discriminants). Un terme présent dans tous les documents (comme "le") aura un IDF proche de 0.
+
+```
+IDF(t) = log( N / (1 + df(t)) )
+
+N     = nombre total de documents
+df(t) = nombre de documents contenant le terme t
+```
+
+**TF-IDF = TF × IDF** : un terme obtient un score élevé s'il est fréquent dans le document courant ET rare dans le reste du corpus — c'est un terme caractéristique et discriminant.
+
+**Exemple** : dans un corpus de 1000 articles sur le sport, le mot "football" apparaît dans 500 articles (IDF faible). Le mot "tiki-taka" n'apparaît que dans 3 articles (IDF élevé). Si "tiki-taka" apparaît 5 fois dans un article, son TF-IDF sera bien plus élevé que celui de "football" — il caractérise mieux le sujet de l'article.
+
+**Limites** : TF-IDF ne capture pas le sens sémantique — "voiture" et "automobile" sont traités comme des termes totalement différents. C'est pourquoi on utilise les embeddings denses (Word2Vec, BERT) pour la recherche sémantique, et TF-IDF pour la recherche lexicale exacte.
+
+---
+
+## XIII. Qu'est-ce qu'un index inversé et comment fonctionne-t-il ?
+
+**Question** : "Comment un moteur de recherche comme Elasticsearch retrouve-t-il instantanément les documents contenant un terme parmi des millions de documents ?"
+
+**Réponse** :
+
+Un **index inversé** est la structure de données fondamentale des moteurs de recherche full-text. Au lieu d'indexer les documents par leur identifiant (index "avant"), on indexe les termes et pour chaque terme, on stocke la liste des documents qui le contiennent.
+
+**Construction** :
+
+```
+Documents :
+  Doc 1 : "Le chat mange la souris"
+  Doc 2 : "Le chien court vite"
+  Doc 3 : "Le chat court dans le jardin"
+
+Index inversé :
+  "chat"   --> [Doc 1, Doc 3]
+  "mange"  --> [Doc 1]
+  "souris" --> [Doc 1]
+  "chien"  --> [Doc 2]
+  "court"  --> [Doc 2, Doc 3]
+  "jardin" --> [Doc 3]
+  "vite"   --> [Doc 2]
+```
+
+**Recherche** : pour la requête "chat court", on intersecte les listes de postings → `[Doc 1, Doc 3] ∩ [Doc 2, Doc 3]` = `[Doc 3]` — résultat instantané, même sur des milliards de documents.
+
+**Ce que stocke réellement un index inversé** : les **posting lists** contiennent plus que des identifiants — elles incluent la position des termes dans le document (pour la recherche de phrases exactes), la fréquence (pour le scoring TF-IDF), et des métadonnées de champ (titre vs corps).
+
+---
+
+## XIV. Qu'est-ce qu'Elasticsearch et comment s'intègre-t-il dans un pipeline RAG ?
+
+**Question** : "Qu'est-ce qu'Elasticsearch, quelle est sa différence avec une base vectorielle comme Chroma ou Pinecone, et comment combiner les deux dans un pipeline RAG hybride ?"
+
+**Réponse** :
+
+**Elasticsearch** est un moteur de recherche et d'analyse distribué basé sur Apache Lucene. Il utilise des index inversés pour la recherche full-text (BM25) et supporte depuis la version 8 la recherche vectorielle dense (k-NN / ANN).
+
+**Recherche BM25 (lexicale)** : variante probabiliste améliorée de TF-IDF, standard de facto pour la recherche full-text. Recherche les correspondances exactes de termes — efficace pour les requêtes avec des mots-clés précis, des noms propres, des codes produits.
+
+**Recherche vectorielle dense** : Elasticsearch indexe des vecteurs d'embedding et retrouve les k vecteurs les plus proches via HNSW (Hierarchical Navigable Small World — algorithme ANN). Efficace pour la recherche sémantique — "voiture" retrouve "automobile".
+
+**RAG hybride — combiner les deux** :
+
+```
+Requête utilisateur
+      |
+      +--------> [BM25 / index inversé]  --> top-k résultats lexicaux
+      |
+      +--------> [Embedding + ANN]       --> top-k résultats sémantiques
+      |
+      v
+[Reciprocal Rank Fusion (RRF)]
+(fusion et reranking des deux listes)
+      |
+      v
+[Cross-Encoder Reranker]
+(tri final par pertinence réelle)
+      |
+      v
+[LLM] --> Réponse ancrée dans les documents
+```
+
+**Pourquoi hybride** : la recherche lexicale capture les correspondances exactes que la recherche sémantique rate (noms propres, codes, acronymes). La recherche sémantique capture les synonymes et la paraphrase que la recherche lexicale rate. La combinaison donne la meilleure couverture.
+
+**Elasticsearch vs Pinecone/Chroma** : Elasticsearch est une solution complète (full-text + vectoriel + analytics + clustering). Pinecone et Chroma sont spécialisés uniquement dans la recherche vectorielle, plus simples à opérer pour du RAG pur.
+
+---
+
+## XV. Qu'est-ce que la similarité cosinus et pourquoi l'utilise-t-on pour comparer des embeddings ?
+
+**Question** : "Pourquoi utilise-t-on la similarité cosinus plutôt que la distance euclidienne pour comparer des vecteurs d'embeddings dans un pipeline RAG ?"
+
+**Réponse** :
+
+La **similarité cosinus** mesure l'angle entre deux vecteurs dans un espace de haute dimension, indépendamment de leur magnitude (norme).
+
+**Formule** :
+
+```
+cos(θ) = (A · B) / (||A|| × ||B||)
+
+Résultat entre -1 et 1 :
+  1   → vecteurs identiques (même direction)
+  0   → vecteurs orthogonaux (aucune relation)
+ -1   → vecteurs opposés
+```
+
+**Pourquoi pas la distance euclidienne** : les embeddings représentent des directions sémantiques dans l'espace vectoriel. Un texte court ("chat") et un texte long ("le chat est un animal domestique félicace") peuvent être sémantiquement très proches, mais leurs vecteurs auront des normes très différentes — la distance euclidienne serait grande même si les directions sont similaires. La similarité cosinus normalise cette magnitude et compare uniquement l'orientation.
+
+**Exemple intuitif** :
+```
+Embedding("roi")    ≈ [0.8, 0.2, 0.1, ...]
+Embedding("reine")  ≈ [0.75, 0.25, 0.15, ...] -- même direction, magnitude légèrement différente
+
+cos("roi", "reine") ≈ 0.92  -- très similaires
+cos("roi", "pizza") ≈ 0.12  -- peu similaires
+```
+
+**En pratique dans un pipeline RAG** : après avoir calculé l'embedding de la question, on cherche les k chunks dont le cosinus avec la question est le plus élevé — ce sont les passages sémantiquement les plus proches, donc les plus susceptibles de contenir la réponse.
+
+**Normalisation** : si tous les vecteurs sont normalisés à la norme unitaire (pratique courante), la similarité cosinus est équivalente au produit scalaire — ce qui permet d'utiliser des opérations matricielles très rapides (BLAS) pour calculer des milliers de similarités simultanément.
+
+---
+
+## XVI. Qu'est-ce qu'un CNN et en quoi diffère-t-il d'un Transformer ?
+
+**Question** : "Qu'est-ce qu'un réseau de neurones convolutif (CNN) et pourquoi les Transformers les ont-ils supplantés pour le NLP, alors que les CNN restent dominants en vision par ordinateur ?"
+
+**Réponse** :
+
+Un **CNN (Convolutional Neural Network)** est une architecture de réseau de neurones qui applique des filtres (noyaux de convolution) sur les données d'entrée pour détecter des motifs locaux — bords, textures, formes en vision, n-grammes en NLP.
+
+**Fonctionnement** :
+
+```
+Image / Texte d'entrée
+        |
+  [Couche de convolution]   -- filtre glisse sur l'entrée, détecte des motifs locaux
+        |
+  [Couche de pooling]       -- réduit la dimension, conserve les caractéristiques saillantes
+        |
+  [Couche de convolution]   -- détecte des motifs de plus haut niveau
+        |
+  [Couche fully connected]  -- classification / régression finale
+```
+
+**CNN vs Transformer pour le NLP** :
+
+| Critère | CNN | Transformer |
+|---|---|---|
+| Champ réceptif | Local (fenêtre fixe) | Global (toute la séquence) |
+| Dépendances longues | Difficiles à capturer | Natives (Self-Attention) |
+| Parallélisme | Partiel | Total |
+| Coût mémoire | Faible | O(n²) avec la séquence |
+| Vitesse d'entraînement | Rapide | Plus lent |
+
+**Pourquoi les CNN ont été supplantés en NLP** : un CNN avec un filtre de taille 3 voit uniquement 3 mots consécutifs à la fois. Pour capturer une dépendance entre le début et la fin d'une phrase longue, il faudrait empiler de nombreuses couches. Le Transformer voit toute la séquence en une seule opération via Self-Attention.
+
+**Pourquoi les CNN restent dominants en vision** : les images ont une structure locale forte — un pixel est fortement corrélé à ses voisins immédiats. Le biais inductif de localité des CNN est un avantage pour la vision. Les Vision Transformers (ViT) existent et sont performants, mais nécessitent beaucoup plus de données et de compute que les CNN pour des performances équivalentes sur des datasets moyens.
