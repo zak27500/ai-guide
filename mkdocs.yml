@@ -1,0 +1,85 @@
+site_name: AI Engineer Guide
+site_description: Fiches de révision techniques — GenAI, LangChain, LangGraph, AWS, Design Thinking
+docs_dir: docs
+
+theme:
+  name: material
+  language: fr
+  palette:
+    - scheme: slate
+      primary: custom
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Passer en mode clair
+    - scheme: default
+      primary: custom
+      accent: deep-purple
+      toggle:
+        icon: material/brightness-7
+        name: Passer en mode sombre
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    logo: material/brain
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - search.highlight
+    - search.suggest
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: "#"
+      name: LinkedIn
+
+plugins:
+  - search:
+      lang: fr
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      title: Sur cette page
+
+nav:
+  - Accueil: index.md
+  - Python: python.md
+  - OOP & Génie Logiciel: oop.md
+  - GenAI: gen_ai.md
+  - LangChain: langchain.md
+  - LangGraph: langgraph.md
+  - AWS: aws.md
+  - Design Thinking: design_thinking.md
+  - SGBD: sgbd.md
