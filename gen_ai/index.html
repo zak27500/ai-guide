@@ -679,6 +679,72 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#xi-quest-ce-que-le-preprocessing-nlp-et-pourquoi-est-il-indispensable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XI. Qu'est-ce que le preprocessing NLP et pourquoi est-il indispensable ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xii-quest-ce-que-tf-idf-et-comment-mesure-t-il-la-pertinence-dun-terme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XII. Qu'est-ce que TF-IDF et comment mesure-t-il la pertinence d'un terme ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xiii-quest-ce-quun-index-inverse-et-comment-fonctionne-t-il" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XIII. Qu'est-ce qu'un index inversé et comment fonctionne-t-il ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xiv-quest-ce-quelasticsearch-et-comment-sintegre-t-il-dans-un-pipeline-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XIV. Qu'est-ce qu'Elasticsearch et comment s'intègre-t-il dans un pipeline RAG ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xv-quest-ce-que-la-similarite-cosinus-et-pourquoi-lutilise-t-on-pour-comparer-des-embeddings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XV. Qu'est-ce que la similarité cosinus et pourquoi l'utilise-t-on pour comparer des embeddings ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xvi-quest-ce-quun-cnn-et-en-quoi-differe-t-il-dun-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XVI. Qu'est-ce qu'un CNN et en quoi diffère-t-il d'un Transformer ?
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -960,6 +1026,72 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#xi-quest-ce-que-le-preprocessing-nlp-et-pourquoi-est-il-indispensable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XI. Qu'est-ce que le preprocessing NLP et pourquoi est-il indispensable ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xii-quest-ce-que-tf-idf-et-comment-mesure-t-il-la-pertinence-dun-terme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XII. Qu'est-ce que TF-IDF et comment mesure-t-il la pertinence d'un terme ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xiii-quest-ce-quun-index-inverse-et-comment-fonctionne-t-il" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XIII. Qu'est-ce qu'un index inversé et comment fonctionne-t-il ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xiv-quest-ce-quelasticsearch-et-comment-sintegre-t-il-dans-un-pipeline-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XIV. Qu'est-ce qu'Elasticsearch et comment s'intègre-t-il dans un pipeline RAG ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xv-quest-ce-que-la-similarite-cosinus-et-pourquoi-lutilise-t-on-pour-comparer-des-embeddings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XV. Qu'est-ce que la similarité cosinus et pourquoi l'utilise-t-on pour comparer des embeddings ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xvi-quest-ce-quun-cnn-et-en-quoi-differe-t-il-dun-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XVI. Qu'est-ce qu'un CNN et en quoi diffère-t-il d'un Transformer ?
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1071,6 +1203,169 @@
 - Chatbot conversationnel : <code>temperature=0.7</code>, <code>top_p=0.9</code>
 - Génération créative (storytelling) : <code>temperature=0.9</code>, <code>top_p=0.95</code>
 - Ne jamais fixer temperature ET top_p à des valeurs extrêmes simultanément.</p>
+<hr />
+<h2 id="xi-quest-ce-que-le-preprocessing-nlp-et-pourquoi-est-il-indispensable">XI. Qu'est-ce que le preprocessing NLP et pourquoi est-il indispensable ?<a class="headerlink" href="#xi-quest-ce-que-le-preprocessing-nlp-et-pourquoi-est-il-indispensable" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Avant d'alimenter un modèle ou un moteur de recherche avec du texte brut, quelles étapes de prétraitement appliquez-vous et pourquoi ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Le <strong>preprocessing NLP</strong> est la chaîne de transformations appliquées au texte brut pour le rendre exploitable par un modèle ou un algorithme. Un texte mal préparé produit des représentations bruitées qui dégradent toutes les étapes suivantes.</p>
+<p><strong>Les étapes classiques dans l'ordre</strong> :</p>
+<p><strong>Nettoyage</strong> : suppression des balises HTML, des caractères spéciaux, de la ponctuation non significative, normalisation des espaces et des encodages.</p>
+<p><strong>Lowercasing</strong> : mise en minuscules pour que "Paris" et "paris" soient traités comme le même token. À désactiver si la casse est sémantiquement significative (NER, acronymes).</p>
+<p><strong>Tokenisation</strong> : découpage du texte en unités atomiques (tokens). Peut se faire au niveau mot, sous-mot (BPE, WordPiece — utilisé par BERT/GPT), ou caractère.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-uncased&quot;</span><span class="p">)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="s2">&quot;Le RAG améliore les LLM&quot;</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># [&#39;le&#39;, &#39;rag&#39;, &#39;améliore&#39;, &#39;les&#39;, &#39;ll&#39;, &#39;##m&#39;]</span>
+</span></code></pre></div>
+<p><strong>Stopwords</strong> : suppression des mots très fréquents et peu informatifs (le, la, de, et...). Utile pour TF-IDF et la recherche classique, mais souvent inutile pour les LLM qui ont déjà appris à les pondérer.</p>
+<p><strong>Stemming / Lemmatisation</strong> : réduction d'un mot à sa racine.
+- Stemming (rapide, brutal) : "mangeait" → "mang"
+- Lemmatisation (plus précise, contextualisée) : "mangeait" → "manger"</p>
+<p><strong>Pourquoi moins critique avec les LLM</strong> : les modèles comme BERT ou GPT ont été entraînés sur du texte brut et gèrent nativement la morphologie, les stopwords et la casse. Le preprocessing reste indispensable pour la recherche vectorielle (qualité des embeddings), les modèles classiques (TF-IDF, SVM), et la réduction du bruit dans les pipelines RAG.</p>
+<hr />
+<h2 id="xii-quest-ce-que-tf-idf-et-comment-mesure-t-il-la-pertinence-dun-terme">XII. Qu'est-ce que TF-IDF et comment mesure-t-il la pertinence d'un terme ?<a class="headerlink" href="#xii-quest-ce-que-tf-idf-et-comment-mesure-t-il-la-pertinence-dun-terme" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Expliquez le principe de TF-IDF. Comment permet-il de distinguer un terme important d'un terme fréquent mais peu informatif ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p><strong>TF-IDF (Term Frequency — Inverse Document Frequency)</strong> est une mesure statistique qui quantifie l'importance d'un mot dans un document par rapport à une collection de documents (corpus).</p>
+<p><strong>TF — Term Frequency</strong> : fréquence brute d'un terme dans un document. Plus un mot apparaît dans le document, plus son TF est élevé.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>TF(t, d) = nombre d&#39;occurrences de t dans d / nombre total de mots dans d
+</span></code></pre></div>
+<p><strong>IDF — Inverse Document Frequency</strong> : pénalise les termes qui apparaissent dans beaucoup de documents (donc peu discriminants). Un terme présent dans tous les documents (comme "le") aura un IDF proche de 0.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>IDF(t) = log( N / (1 + df(t)) )
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>N     = nombre total de documents
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>df(t) = nombre de documents contenant le terme t
+</span></code></pre></div>
+<p><strong>TF-IDF = TF × IDF</strong> : un terme obtient un score élevé s'il est fréquent dans le document courant ET rare dans le reste du corpus — c'est un terme caractéristique et discriminant.</p>
+<p><strong>Exemple</strong> : dans un corpus de 1000 articles sur le sport, le mot "football" apparaît dans 500 articles (IDF faible). Le mot "tiki-taka" n'apparaît que dans 3 articles (IDF élevé). Si "tiki-taka" apparaît 5 fois dans un article, son TF-IDF sera bien plus élevé que celui de "football" — il caractérise mieux le sujet de l'article.</p>
+<p><strong>Limites</strong> : TF-IDF ne capture pas le sens sémantique — "voiture" et "automobile" sont traités comme des termes totalement différents. C'est pourquoi on utilise les embeddings denses (Word2Vec, BERT) pour la recherche sémantique, et TF-IDF pour la recherche lexicale exacte.</p>
+<hr />
+<h2 id="xiii-quest-ce-quun-index-inverse-et-comment-fonctionne-t-il">XIII. Qu'est-ce qu'un index inversé et comment fonctionne-t-il ?<a class="headerlink" href="#xiii-quest-ce-quun-index-inverse-et-comment-fonctionne-t-il" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Comment un moteur de recherche comme Elasticsearch retrouve-t-il instantanément les documents contenant un terme parmi des millions de documents ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Un <strong>index inversé</strong> est la structure de données fondamentale des moteurs de recherche full-text. Au lieu d'indexer les documents par leur identifiant (index "avant"), on indexe les termes et pour chaque terme, on stocke la liste des documents qui le contiennent.</p>
+<p><strong>Construction</strong> :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Documents :
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  Doc 1 : &quot;Le chat mange la souris&quot;
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  Doc 2 : &quot;Le chien court vite&quot;
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  Doc 3 : &quot;Le chat court dans le jardin&quot;
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>Index inversé :
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  &quot;chat&quot;   --&gt; [Doc 1, Doc 3]
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  &quot;mange&quot;  --&gt; [Doc 1]
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  &quot;souris&quot; --&gt; [Doc 1]
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>  &quot;chien&quot;  --&gt; [Doc 2]
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>  &quot;court&quot;  --&gt; [Doc 2, Doc 3]
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>  &quot;jardin&quot; --&gt; [Doc 3]
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>  &quot;vite&quot;   --&gt; [Doc 2]
+</span></code></pre></div>
+<p><strong>Recherche</strong> : pour la requête "chat court", on intersecte les listes de postings → <code>[Doc 1, Doc 3] ∩ [Doc 2, Doc 3]</code> = <code>[Doc 3]</code> — résultat instantané, même sur des milliards de documents.</p>
+<p><strong>Ce que stocke réellement un index inversé</strong> : les <strong>posting lists</strong> contiennent plus que des identifiants — elles incluent la position des termes dans le document (pour la recherche de phrases exactes), la fréquence (pour le scoring TF-IDF), et des métadonnées de champ (titre vs corps).</p>
+<hr />
+<h2 id="xiv-quest-ce-quelasticsearch-et-comment-sintegre-t-il-dans-un-pipeline-rag">XIV. Qu'est-ce qu'Elasticsearch et comment s'intègre-t-il dans un pipeline RAG ?<a class="headerlink" href="#xiv-quest-ce-quelasticsearch-et-comment-sintegre-t-il-dans-un-pipeline-rag" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Qu'est-ce qu'Elasticsearch, quelle est sa différence avec une base vectorielle comme Chroma ou Pinecone, et comment combiner les deux dans un pipeline RAG hybride ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p><strong>Elasticsearch</strong> est un moteur de recherche et d'analyse distribué basé sur Apache Lucene. Il utilise des index inversés pour la recherche full-text (BM25) et supporte depuis la version 8 la recherche vectorielle dense (k-NN / ANN).</p>
+<p><strong>Recherche BM25 (lexicale)</strong> : variante probabiliste améliorée de TF-IDF, standard de facto pour la recherche full-text. Recherche les correspondances exactes de termes — efficace pour les requêtes avec des mots-clés précis, des noms propres, des codes produits.</p>
+<p><strong>Recherche vectorielle dense</strong> : Elasticsearch indexe des vecteurs d'embedding et retrouve les k vecteurs les plus proches via HNSW (Hierarchical Navigable Small World — algorithme ANN). Efficace pour la recherche sémantique — "voiture" retrouve "automobile".</p>
+<p><strong>RAG hybride — combiner les deux</strong> :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Requête utilisateur
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>      |
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>      +--------&gt; [BM25 / index inversé]  --&gt; top-k résultats lexicaux
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>      |
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>      +--------&gt; [Embedding + ANN]       --&gt; top-k résultats sémantiques
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>      |
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>      v
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>[Reciprocal Rank Fusion (RRF)]
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>(fusion et reranking des deux listes)
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>      |
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>      v
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>[Cross-Encoder Reranker]
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>(tri final par pertinence réelle)
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>      |
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>      v
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>[LLM] --&gt; Réponse ancrée dans les documents
+</span></code></pre></div>
+<p><strong>Pourquoi hybride</strong> : la recherche lexicale capture les correspondances exactes que la recherche sémantique rate (noms propres, codes, acronymes). La recherche sémantique capture les synonymes et la paraphrase que la recherche lexicale rate. La combinaison donne la meilleure couverture.</p>
+<p><strong>Elasticsearch vs Pinecone/Chroma</strong> : Elasticsearch est une solution complète (full-text + vectoriel + analytics + clustering). Pinecone et Chroma sont spécialisés uniquement dans la recherche vectorielle, plus simples à opérer pour du RAG pur.</p>
+<hr />
+<h2 id="xv-quest-ce-que-la-similarite-cosinus-et-pourquoi-lutilise-t-on-pour-comparer-des-embeddings">XV. Qu'est-ce que la similarité cosinus et pourquoi l'utilise-t-on pour comparer des embeddings ?<a class="headerlink" href="#xv-quest-ce-que-la-similarite-cosinus-et-pourquoi-lutilise-t-on-pour-comparer-des-embeddings" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Pourquoi utilise-t-on la similarité cosinus plutôt que la distance euclidienne pour comparer des vecteurs d'embeddings dans un pipeline RAG ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>La <strong>similarité cosinus</strong> mesure l'angle entre deux vecteurs dans un espace de haute dimension, indépendamment de leur magnitude (norme).</p>
+<p><strong>Formule</strong> :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cos(θ) = (A · B) / (||A|| × ||B||)
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Résultat entre -1 et 1 :
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  1   → vecteurs identiques (même direction)
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  0   → vecteurs orthogonaux (aucune relation)
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a> -1   → vecteurs opposés
+</span></code></pre></div>
+<p><strong>Pourquoi pas la distance euclidienne</strong> : les embeddings représentent des directions sémantiques dans l'espace vectoriel. Un texte court ("chat") et un texte long ("le chat est un animal domestique félicace") peuvent être sémantiquement très proches, mais leurs vecteurs auront des normes très différentes — la distance euclidienne serait grande même si les directions sont similaires. La similarité cosinus normalise cette magnitude et compare uniquement l'orientation.</p>
+<p><strong>Exemple intuitif</strong> :
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Embedding(&quot;roi&quot;)    ≈ [0.8, 0.2, 0.1, ...]
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Embedding(&quot;reine&quot;)  ≈ [0.75, 0.25, 0.15, ...] -- même direction, magnitude légèrement différente
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>cos(&quot;roi&quot;, &quot;reine&quot;) ≈ 0.92  -- très similaires
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>cos(&quot;roi&quot;, &quot;pizza&quot;) ≈ 0.12  -- peu similaires
+</span></code></pre></div></p>
+<p><strong>En pratique dans un pipeline RAG</strong> : après avoir calculé l'embedding de la question, on cherche les k chunks dont le cosinus avec la question est le plus élevé — ce sont les passages sémantiquement les plus proches, donc les plus susceptibles de contenir la réponse.</p>
+<p><strong>Normalisation</strong> : si tous les vecteurs sont normalisés à la norme unitaire (pratique courante), la similarité cosinus est équivalente au produit scalaire — ce qui permet d'utiliser des opérations matricielles très rapides (BLAS) pour calculer des milliers de similarités simultanément.</p>
+<hr />
+<h2 id="xvi-quest-ce-quun-cnn-et-en-quoi-differe-t-il-dun-transformer">XVI. Qu'est-ce qu'un CNN et en quoi diffère-t-il d'un Transformer ?<a class="headerlink" href="#xvi-quest-ce-quun-cnn-et-en-quoi-differe-t-il-dun-transformer" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Qu'est-ce qu'un réseau de neurones convolutif (CNN) et pourquoi les Transformers les ont-ils supplantés pour le NLP, alors que les CNN restent dominants en vision par ordinateur ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Un <strong>CNN (Convolutional Neural Network)</strong> est une architecture de réseau de neurones qui applique des filtres (noyaux de convolution) sur les données d'entrée pour détecter des motifs locaux — bords, textures, formes en vision, n-grammes en NLP.</p>
+<p><strong>Fonctionnement</strong> :</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Image / Texte d&#39;entrée
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>        |
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  [Couche de convolution]   -- filtre glisse sur l&#39;entrée, détecte des motifs locaux
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        |
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>  [Couche de pooling]       -- réduit la dimension, conserve les caractéristiques saillantes
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        |
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>  [Couche de convolution]   -- détecte des motifs de plus haut niveau
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        |
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>  [Couche fully connected]  -- classification / régression finale
+</span></code></pre></div>
+<p><strong>CNN vs Transformer pour le NLP</strong> :</p>
+<table>
+<thead>
+<tr>
+<th>Critère</th>
+<th>CNN</th>
+<th>Transformer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Champ réceptif</td>
+<td>Local (fenêtre fixe)</td>
+<td>Global (toute la séquence)</td>
+</tr>
+<tr>
+<td>Dépendances longues</td>
+<td>Difficiles à capturer</td>
+<td>Natives (Self-Attention)</td>
+</tr>
+<tr>
+<td>Parallélisme</td>
+<td>Partiel</td>
+<td>Total</td>
+</tr>
+<tr>
+<td>Coût mémoire</td>
+<td>Faible</td>
+<td>O(n²) avec la séquence</td>
+</tr>
+<tr>
+<td>Vitesse d'entraînement</td>
+<td>Rapide</td>
+<td>Plus lent</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pourquoi les CNN ont été supplantés en NLP</strong> : un CNN avec un filtre de taille 3 voit uniquement 3 mots consécutifs à la fois. Pour capturer une dépendance entre le début et la fin d'une phrase longue, il faudrait empiler de nombreuses couches. Le Transformer voit toute la séquence en une seule opération via Self-Attention.</p>
+<p><strong>Pourquoi les CNN restent dominants en vision</strong> : les images ont une structure locale forte — un pixel est fortement corrélé à ses voisins immédiats. Le biais inductif de localité des CNN est un avantage pour la vision. Les Vision Transformers (ViT) existent et sont performants, mais nécessitent beaucoup plus de données et de compute que les CNN pour des performances équivalentes sur des datasets moyens.</p>
 
 
 
