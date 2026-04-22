@@ -381,6 +381,25 @@
   
 
       
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../devops/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  DevOps
+
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -827,6 +846,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#xi-cest-quoi-les-tools-dun-agent-et-comment-les-definit-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XI. C'est quoi les tools d'un agent et comment les définit-on ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xii-quest-ce-quun-agent-superviseur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XII. Qu'est-ce qu'un Agent Superviseur ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xiii-quelle-difference-entre-mcp-et-les-tools-langgraph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XIII. Quelle différence entre MCP et les tools LangGraph ?
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -904,6 +956,33 @@
     
   
     SGBD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
   
 
     
@@ -1145,6 +1224,39 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xi-cest-quoi-les-tools-dun-agent-et-comment-les-definit-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XI. C'est quoi les tools d'un agent et comment les définit-on ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xii-quest-ce-quun-agent-superviseur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XII. Qu'est-ce qu'un Agent Superviseur ?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xiii-quelle-difference-entre-mcp-et-les-tools-langgraph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XIII. Quelle différence entre MCP et les tools LangGraph ?
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1437,6 +1549,118 @@
 </span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>                    /agent/stream  --&gt; streaming token par token
 </span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>                    /agent/batch   --&gt; plusieurs requetes en parallele
 </span></code></pre></div>
+<hr />
+<h2 id="xi-cest-quoi-les-tools-dun-agent-et-comment-les-definit-on">XI. C'est quoi les tools d'un agent et comment les définit-on ?<a class="headerlink" href="#xi-cest-quoi-les-tools-dun-agent-et-comment-les-definit-on" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Concrètement, qu'est-ce qu'un 'tool' dans un agent LangGraph ? Comment le LLM sait-il quel outil appeler et avec quels arguments ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Un <strong>tool</strong> est une fonction Python exposée au LLM via un schéma JSON (name, description, paramètres). Le LLM ne l'exécute pas directement — il décide de l'appeler en générant un message structuré (<code>tool_calls</code>), et c'est <code>ToolNode</code> dans LangGraph qui exécute réellement la fonction.</p>
+<p><strong>Définition d'un tool</strong> :</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nd">@tool</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">rechercher_meteo</span><span class="p">(</span><span class="n">ville</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retourne la météo actuelle pour une ville donnée.&quot;&quot;&quot;</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Il fait 22°C à </span><span class="si">{</span><span class="n">ville</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="nd">@tool</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">calculer</span><span class="p">(</span><span class="n">expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Évalue une expression mathématique. Ex: &#39;2 + 3 * 4&#39;&quot;&quot;&quot;</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">))</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="n">tools</span> <span class="o">=</span> <span class="p">[</span><span class="n">rechercher_meteo</span><span class="p">,</span> <span class="n">calculer</span><span class="p">]</span>
+</span></code></pre></div>
+<p><strong>Comment le LLM choisit le bon tool</strong> : lors du <code>bind_tools</code>, LangChain envoie les schémas JSON de tous les tools dans le contexte. Le LLM lit les descriptions et génère un <code>AIMessage</code> avec un champ <code>tool_calls</code> contenant le nom du tool et les arguments. C'est pourquoi les descriptions sont critiques — elles guident le choix du modèle.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">llm_with_tools</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">bind_tools</span><span class="p">(</span><span class="n">tools</span><span class="p">)</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">noeud_llm</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">):</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">llm_with_tools</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">])]}</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.prebuilt</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToolNode</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">noeud_tools</span> <span class="o">=</span> <span class="n">ToolNode</span><span class="p">(</span><span class="n">tools</span><span class="p">)</span>  <span class="c1"># exécute les tools et retourne ToolMessages</span>
+</span></code></pre></div>
+<p><strong>Bonnes pratiques</strong> : descriptions explicites et précises, typage strict des paramètres, retourner un message d'erreur string plutôt que lever une exception — l'agent peut alors se corriger seul.</p>
+<hr />
+<h2 id="xii-quest-ce-quun-agent-superviseur">XII. Qu'est-ce qu'un Agent Superviseur ?<a class="headerlink" href="#xii-quest-ce-quun-agent-superviseur" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Qu'est-ce qu'un agent superviseur dans LangGraph et quand architecture-t-on un système multi-agents avec superviseur plutôt qu'un seul agent ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p>Un <strong>agent superviseur</strong> est un nœud LLM central qui orchestre plusieurs agents spécialisés. Il reçoit la requête, décide quel sous-agent appeler, agrège les résultats, et décide quand la tâche est terminée.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Utilisateur
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    |
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    v
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>[Superviseur LLM]  &lt;---------+
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    |                         |
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    +---&gt; [Agent Recherche]   | résultat
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    +---&gt; [Agent Code]        | résultat
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    +---&gt; [Agent Analyse]     | résultat
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    |                         |
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    +----&gt; chaque agent renvoie au superviseur
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    |
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    v (FINISH)
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>Réponse finale
+</span></code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">members</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;researcher&quot;</span><span class="p">,</span> <span class="s2">&quot;coder&quot;</span><span class="p">,</span> <span class="s2">&quot;analyst&quot;</span><span class="p">]</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">superviseur</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="n">system</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Tu orchestre : </span><span class="si">{</span><span class="n">members</span><span class="si">}</span><span class="s2">. Réponds avec le nom de l&#39;agent ou FINISH.&quot;</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">invoke</span><span class="p">([</span><span class="n">SystemMessage</span><span class="p">(</span><span class="n">system</span><span class="p">)]</span> <span class="o">+</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">])</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;next&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">}</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">router</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    <span class="k">return</span> <span class="n">END</span> <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;FINISH&quot;</span> <span class="k">else</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;next&quot;</span><span class="p">]</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="n">graph</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span><span class="s2">&quot;supervisor&quot;</span><span class="p">,</span> <span class="n">router</span><span class="p">)</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="s2">&quot;supervisor&quot;</span><span class="p">)</span>  <span class="c1"># chaque agent renvoie au superviseur</span>
+</span></code></pre></div>
+<p><strong>Quand utiliser</strong> : tâches nécessitant des expertises distinctes (recherche + code + analyse), workflows conditionnels longs, sous-agents réutilisables indépendamment.</p>
+<hr />
+<h2 id="xiii-quelle-difference-entre-mcp-et-les-tools-langgraph">XIII. Quelle différence entre MCP et les tools LangGraph ?<a class="headerlink" href="#xiii-quelle-difference-entre-mcp-et-les-tools-langgraph" title="Permanent link">&para;</a></h2>
+<p><strong>Question</strong> : "Quelle est la différence entre le Model Context Protocol (MCP) et les tools natifs de LangGraph ? Quand utiliser l'un plutôt que l'autre ?"</p>
+<p><strong>Réponse</strong> :</p>
+<p><strong>LangGraph Tools</strong> sont des fonctions Python <code>@tool</code> bindées directement au LLM. Elles vivent dans le même processus que l'agent — rapides, simples, spécifiques à l'application.</p>
+<p><strong>MCP (Model Context Protocol)</strong> est un protocole standardisé (JSON-RPC) qui permet à un LLM de communiquer avec des serveurs d'outils <strong>externes et indépendants</strong>. Un serveur MCP expose des tools, ressources et prompts via un contrat universel compatible avec n'importe quel LLM ou framework.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>LangGraph Tools :              MCP :
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>+------------------+           +------------------+
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>| Agent LangGraph  |           | Agent (Claude,   |
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>| + tool_A()       |           | GPT, Gemini...)  |
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>| + tool_B()       |           +--------+---------+
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>| (in-process)     |                    | MCP Protocol
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>+------------------+           +--------+--------+--------+
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>                               | MCP Server   | MCP Server|
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>                               | (filesystem) | (GitHub)  |
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>LangGraph Tools</th>
+<th>MCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Portée</td>
+<td>Application spécifique</td>
+<td>Multi-frameworks, multi-LLMs</td>
+</tr>
+<tr>
+<td>Déploiement</td>
+<td>In-process</td>
+<td>Serveur externe indépendant</td>
+</tr>
+<tr>
+<td>Réutilisabilité</td>
+<td>LangGraph uniquement</td>
+<td>N'importe quel client MCP</td>
+</tr>
+<tr>
+<td>Cas d'usage</td>
+<td>Logique métier custom</td>
+<td>Intégrations système (FS, DB, APIs)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>En pratique</strong> : MCP pour des intégrations système réutilisables partagées entre plusieurs agents (accès fichiers, GitHub, bases de données). LangGraph tools pour la logique métier propre à l'application.</p>
 
 
 
