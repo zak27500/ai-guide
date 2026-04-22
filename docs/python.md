@@ -533,3 +533,169 @@ POST   /articles/42/delete
 | 500 | Internal Server Error | Erreur serveur inattendue |
 
 **Versioning** : préfixer les routes avec la version (`/v1/articles`) pour permettre l'évolution de l'API sans casser les clients existants.
+
+---
+
+## XII. Qu'est-ce que `__init__` et comment fonctionne la construction d'un objet ?
+
+**Question** : "Quelle est la différence entre `__init__` et `__new__` en Python ? Que se passe-t-il exactement quand on écrit `obj = MaClasse()` ?"
+
+**Réponse** :
+
+La création d'un objet en Python est un processus en deux étapes distinctes.
+
+**`__new__`** : méthode de classe appelée en premier. Elle alloue la mémoire et retourne une nouvelle instance (vide) de la classe. On la surcharge rarement — uniquement pour contrôler l'allocation (Singleton, immutabilité via `__new__` sur les sous-classes de `int`, `str`, `tuple`).
+
+**`__init__`** : appelé juste après `__new__`, sur l'instance déjà créée. Il initialise les attributs — c'est le constructeur au sens usuel. Il ne retourne rien (`None`).
+
+```python
+class MaClasse:
+    def __new__(cls, *args, **kwargs):
+        print(f"__new__ : allocation de l'instance")
+        instance = super().__new__(cls)  # alloue la mémoire
+        return instance
+
+    def __init__(self, valeur):
+        print(f"__init__ : initialisation avec {valeur}")
+        self.valeur = valeur
+
+obj = MaClasse(42)
+# __new__ : allocation de l'instance
+# __init__ : initialisation avec 42
+```
+
+**Autres méthodes spéciales utiles** :
+- `__repr__` : représentation non ambiguë pour les développeurs (`repr(obj)`)
+- `__str__` : représentation lisible pour les utilisateurs (`str(obj)`, `print(obj)`)
+- `__eq__` : définit l'égalité entre objets (`obj1 == obj2`)
+- `__hash__` : requis si on définit `__eq__` pour que l'objet soit hashable (utilisable comme clé de dict)
+- `__del__` : appelé avant la désallocation (éviter — comportement non garanti avec le GC)
+
+---
+
+## XIII. Qu'est-ce qu'une Dataclass et quand l'utiliser ?
+
+**Question** : "Qu'est-ce que le décorateur `@dataclass` en Python et en quoi simplifie-t-il la définition de classes de données par rapport à une classe classique ?"
+
+**Réponse** :
+
+`@dataclass` (Python 3.7+) génère automatiquement les méthodes boilerplate (`__init__`, `__repr__`, `__eq__`) à partir des annotations de type, évitant d'écrire du code répétitif.
+
+```python
+from dataclasses import dataclass, field
+from typing import Optional
+
+# Sans dataclass — verbose
+class ArticleClassique:
+    def __init__(self, titre: str, prix: float, tags: list):
+        self.titre = titre
+        self.prix = prix
+        self.tags = tags
+    def __repr__(self):
+        return f"Article(titre={self.titre}, prix={self.prix})"
+    def __eq__(self, other):
+        return self.titre == other.titre and self.prix == other.prix
+
+# Avec dataclass — équivalent exact, 3 lignes
+@dataclass
+class Article:
+    titre: str
+    prix: float
+    tags: list = field(default_factory=list)  # valeur mutable : toujours field()
+    description: Optional[str] = None
+```
+
+**Options clés** :
+- `@dataclass(frozen=True)` : rend l'instance immutable (attributs non modifiables) et hashable — équivalent d'un tuple nommé typé
+- `@dataclass(order=True)` : génère `__lt__`, `__le__`, `__gt__`, `__ge__` pour le tri
+- `field(default_factory=list)` : **obligatoire** pour les valeurs mutables par défaut (liste, dict) — sinon la valeur est partagée entre toutes les instances (même piège que les mutable defaults en paramètres de fonction)
+
+**Dataclass vs NamedTuple vs Pydantic** :
+| | Dataclass | NamedTuple | Pydantic |
+|---|---|---|---|
+| Mutable | Oui (défaut) | Non | Oui |
+| Validation | Non | Non | Oui |
+| Sérialisation JSON | Manuel | Manuel | Native |
+| Performances | Rapide | Rapide | Plus lent |
+
+En production avec FastAPI : Pydantic. Pour des structures internes sans validation : `@dataclass`.
+
+---
+
+## XIV. Qu'est-ce que le type hinting et est-il vérifié à l'exécution ?
+
+**Question** : "Python est un langage dynamiquement typé. Les annotations de type (`str`, `int`, `list[str]`) sont-elles vérifiées à l'exécution ? Que se passe-t-il si on passe le mauvais type ?"
+
+**Réponse** :
+
+**Non — les annotations de type Python ne sont pas vérifiées à l'exécution.** Elles sont purement déclaratives et stockées dans `__annotations__`, mais CPython les ignore complètement lors de l'exécution du code.
+
+```python
+def additionner(a: int, b: int) -> int:
+    return a + b
+
+# Aucune erreur à l'exécution — Python ne vérifie pas
+resultat = additionner("hello", " world")
+print(resultat)  # "hello world" -- aucune exception !
+```
+
+**À quoi servent alors les annotations** :
+- **Outils d'analyse statique** (`mypy`, `pyright`) : détectent les incohérences de types avant l'exécution, sans jamais lancer le programme
+- **IDE** (VS Code, PyCharm) : autocomplétion, détection d'erreurs en temps réel
+- **Documentation** : les signatures de fonctions sont auto-documentées
+- **Pydantic / FastAPI** : ces bibliothèques lisent `__annotations__` à l'exécution et valident activement les données
+
+**`from __future__ import annotations`** : en Python 3.10+, les annotations sont évaluées paresseusement (lazy) — elles ne sont pas exécutées à l'import, ce qui évite les problèmes de références circulaires dans les types.
+
+---
+
+## XV. Comment utiliser mypy, Ruff et pre-commit en production ?
+
+**Question** : "Comment mettez-vous en place une chaîne de qualité de code Python en production ? Quelle est la différence entre mypy et Ruff, et comment automatiser leur exécution ?"
+
+**Réponse** :
+
+Ces trois outils forment la chaîne standard de qualité de code Python.
+
+**Ruff** : linter et formateur ultrarapide écrit en Rust (remplace flake8, isort, black, et plus). Détecte les erreurs de style, les imports inutilisés, les variables non utilisées, et formate le code automatiquement.
+
+```bash
+pip install ruff
+ruff check .          # lint
+ruff check --fix .    # lint + corrections automatiques
+ruff format .         # formatage (remplace black)
+```
+
+**mypy** : vérificateur de types statique. Analyse les annotations de type et détecte les incohérences sans exécuter le code.
+
+```bash
+pip install mypy
+mypy mon_module.py
+# error: Argument 1 to "additionner" has incompatible type "str"; expected "int"
+```
+
+**pre-commit** : framework de hooks Git qui exécute automatiquement des vérifications avant chaque `git commit`. Si un hook échoue, le commit est bloqué.
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.4.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.9.0
+    hooks:
+      - id: mypy
+```
+
+```bash
+pip install pre-commit
+pre-commit install        # installe les hooks dans .git/hooks/pre-commit
+pre-commit run --all-files  # lancer manuellement sur tout le projet
+```
+
+**En CI/CD** : ces mêmes outils tournent dans le pipeline (GitHub Actions, CodeBuild) pour bloquer les PR qui ne respectent pas les standards — pre-commit en local évite d'attendre le feedback de la CI.

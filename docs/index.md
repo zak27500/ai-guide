@@ -12,3 +12,4 @@ Fiches de révision au format **Question → Réponse**.
 | [AWS](aws.md) | EC2, Lambda, S3, IAM, VPC, Bedrock, SQS, CI/CD |
 | [Design Thinking](design_thinking.md) | 5 phases, Personas, POV, Prototype, Test |
 | [SGBD](sgbd.md) | UML, Normalisation 1NF/2NF/3NF, ACID, Index, SQL vs NoSQL |
+| [DevOps](devops.md) | Git merge/rebase, Docker multi-stage, Helm Charts, ArgoCD |

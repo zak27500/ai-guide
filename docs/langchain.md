@@ -165,6 +165,58 @@ Je réalise d'abord une analyse du problème réel, puis je lui présente les di
 
 ---
 
+## XI. Quelle différence entre LangSmith et Langfuse ?
+
+**Question** : "Vous avez deux options pour l'observabilité de vos pipelines LLM : LangSmith et Langfuse. Quelle est la différence et comment choisir ?"
+
+**Réponse** :
+
+Les deux outils servent à **tracer, débugger et monitorer** les pipelines LLM — ils capturent chaque appel LLM, chaque tool call, chaque étape de la chaîne avec les tokens consommés, la latence et le coût.
+
+**LangSmith** : plateforme propriétaire d'Anthropic/LangChain, profondément intégrée dans l'écosystème LangChain/LangGraph. Activation en deux lignes d'environnement.
+
+```python
+import os
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_API_KEY"] = "ls__..."
+os.environ["LANGCHAIN_PROJECT"] = "mon-projet"
+
+# Toutes les chains et graphs LangChain sont tracées automatiquement
+chain = prompt | llm | parser
+chain.invoke({"question": "..."})
+# → trace complète visible sur smith.langchain.com
+```
+
+**Langfuse** : plateforme open-source, auto-hébergeable, agnostique au framework. Fonctionne avec n'importe quel SDK LLM (OpenAI, Anthropic direct, LlamaIndex...) via un SDK léger.
+
+```python
+from langfuse.decorators import observe, langfuse_context
+
+@observe()  # trace automatique de la fonction
+def mon_pipeline(question: str):
+    response = llm.invoke(question)
+    langfuse_context.update_current_observation(
+        input=question,
+        output=response.content,
+        usage={"input": 150, "output": 80}
+    )
+    return response
+```
+
+**Comparaison** :
+| | LangSmith | Langfuse |
+|---|---|---|
+| Intégration LangChain | Native (0 config) | Manuel (décorateurs) |
+| Open-source | Non | Oui (auto-hébergeable) |
+| Agnosticisme framework | LangChain uniquement | Tout framework |
+| Évaluation datasets | Oui | Oui |
+| Prix | Payant au-delà du free tier | Gratuit si auto-hébergé |
+| RGPD / données sensibles | Cloud US | Auto-hébergé possible |
+
+**Règle de décision** : LangSmith si 100% LangChain/LangGraph et qu'on veut zéro friction. Langfuse si multi-frameworks, données sensibles (RGPD), ou budget contraint.
+
+---
+
 ## Schema récapitulatif — Tout LangChain en un coup d'oeil
 
 ### 1. Architecture LCEL — La composition en pipe

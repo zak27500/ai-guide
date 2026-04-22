@@ -252,3 +252,108 @@ Ces principes ne sont pas des règles absolues — ce sont des outils de raisonn
 - **TDD rend DIP naturel** : tester en isolation force l'injection de dépendances.
 
 **La question à se poser face à chaque décision** : "Est-ce que cette complexité résout un problème réel aujourd'hui, ou est-ce que j'anticipe un futur incertain ?" Si la réponse est "j'anticipe" — appliquer YAGNI et KISS. Si une règle métier commence à diverger — appliquer DRY. Si une nouvelle fonctionnalité oblige à modifier du code existant testé — appliquer OCP.
+
+---
+
+## VIII. Quels sont les Design Patterns les plus courants et quand les utiliser ?
+
+**Question** : "Citez et expliquez les design patterns que vous utilisez le plus souvent. Comment distinguez-vous un Singleton d'une Factory, et quand choisit-on l'un ou l'autre ?"
+
+**Réponse** :
+
+Les Design Patterns sont des solutions éprouvées à des problèmes récurrents de conception. On les regroupe en trois familles : créationnels, structurels, comportementaux.
+
+**Singleton (Créationnel)** : garantit qu'une classe n'a qu'une seule instance dans tout le programme et fournit un point d'accès global. Utilisé pour les connexions de base de données, les configurations, les loggers.
+
+```python
+class DatabaseConnection:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance.connection = cls._connect()
+        return cls._instance
+
+    @staticmethod
+    def _connect():
+        return "connexion établie"
+
+db1 = DatabaseConnection()
+db2 = DatabaseConnection()
+assert db1 is db2  # True — même instance
+```
+
+**Factory (Créationnel)** : délègue la création d'objets à une méthode ou classe dédiée, sans que le code client connaisse la classe concrète instanciée. Respecte OCP — ajouter un nouveau type ne modifie pas le code existant.
+
+```python
+class LLMFactory:
+    @staticmethod
+    def create(provider: str):
+        if provider == "openai":
+            return OpenAILLM()
+        elif provider == "anthropic":
+            return AnthropicLLM()
+        elif provider == "local":
+            return OllamaLLM()
+        raise ValueError(f"Provider inconnu : {provider}")
+
+llm = LLMFactory.create("anthropic")  # le client ne connaît pas AnthropicLLM
+```
+
+**Adapter (Structurel)** : convertit l'interface d'une classe en une autre interface attendue par le client. Permet à des classes incompatibles de collaborer sans modifier leur code source.
+
+```python
+# Interface attendue par le reste du code
+class VecteurStore:
+    def rechercher(self, query: str) -> list: ...
+
+# Bibliothèque externe avec une interface différente
+class ChromaDB:
+    def similarity_search(self, text: str) -> list: ...
+
+# Adapter : enveloppe ChromaDB pour exposer l'interface attendue
+class ChromaAdapter(VecteurStore):
+    def __init__(self):
+        self._chroma = ChromaDB()
+
+    def rechercher(self, query: str) -> list:
+        return self._chroma.similarity_search(query)
+```
+
+**Strategy (Comportemental)** : définit une famille d'algorithmes interchangeables et les encapsule chacun dans une classe. Le client choisit l'algorithme à l'exécution sans modifier le code qui l'utilise.
+
+```python
+from abc import ABC, abstractmethod
+
+class StrategieChunking(ABC):
+    @abstractmethod
+    def chunker(self, texte: str) -> list[str]: ...
+
+class ChunkingFixe(StrategieChunking):
+    def chunker(self, texte: str) -> list[str]:
+        return [texte[i:i+500] for i in range(0, len(texte), 500)]
+
+class ChunkingRecursif(StrategieChunking):
+    def chunker(self, texte: str) -> list[str]:
+        # découpage par paragraphes, puis phrases
+        ...
+
+class Pipeline:
+    def __init__(self, strategie: StrategieChunking):
+        self.strategie = strategie
+
+    def traiter(self, texte: str):
+        return self.strategie.chunker(texte)
+```
+
+**Observer (Comportemental)** : un objet (sujet) notifie automatiquement une liste d'observateurs quand son état change. Utilisé pour les systèmes d'événements, les callbacks, les webhooks.
+
+**Résumé — quand choisir** :
+| Pattern | Problème résolu |
+|---|---|
+| Singleton | Une seule instance partagée (DB, config, logger) |
+| Factory | Créer des objets sans connaître la classe concrète |
+| Adapter | Intégrer une bibliothèque avec une interface incompatible |
+| Strategy | Algorithmes interchangeables à l'exécution |
+| Observer | Notifier des composants quand un état change |

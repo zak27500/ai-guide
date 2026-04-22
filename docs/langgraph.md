@@ -394,3 +394,122 @@ Reprise possible a tout moment en fournissant le meme thread_id
                     /agent/stream  --> streaming token par token
                     /agent/batch   --> plusieurs requetes en parallele
 ```
+
+---
+
+## XI. C'est quoi les tools d'un agent et comment les définit-on ?
+
+**Question** : "Concrètement, qu'est-ce qu'un 'tool' dans un agent LangGraph ? Comment le LLM sait-il quel outil appeler et avec quels arguments ?"
+
+**Réponse** :
+
+Un **tool** est une fonction Python exposée au LLM via un schéma JSON (name, description, paramètres). Le LLM ne l'exécute pas directement — il décide de l'appeler en générant un message structuré (`tool_calls`), et c'est `ToolNode` dans LangGraph qui exécute réellement la fonction.
+
+**Définition d'un tool** :
+
+```python
+from langchain_core.tools import tool
+
+@tool
+def rechercher_meteo(ville: str) -> str:
+    """Retourne la météo actuelle pour une ville donnée."""
+    return f"Il fait 22°C à {ville}"
+
+@tool
+def calculer(expression: str) -> str:
+    """Évalue une expression mathématique. Ex: '2 + 3 * 4'"""
+    return str(eval(expression))
+
+tools = [rechercher_meteo, calculer]
+```
+
+**Comment le LLM choisit le bon tool** : lors du `bind_tools`, LangChain envoie les schémas JSON de tous les tools dans le contexte. Le LLM lit les descriptions et génère un `AIMessage` avec un champ `tool_calls` contenant le nom du tool et les arguments. C'est pourquoi les descriptions sont critiques — elles guident le choix du modèle.
+
+```python
+llm_with_tools = ChatOpenAI(model="gpt-4o").bind_tools(tools)
+
+def noeud_llm(state: AgentState):
+    return {"messages": [llm_with_tools.invoke(state["messages"])]}
+
+from langgraph.prebuilt import ToolNode
+noeud_tools = ToolNode(tools)  # exécute les tools et retourne ToolMessages
+```
+
+**Bonnes pratiques** : descriptions explicites et précises, typage strict des paramètres, retourner un message d'erreur string plutôt que lever une exception — l'agent peut alors se corriger seul.
+
+---
+
+## XII. Qu'est-ce qu'un Agent Superviseur ?
+
+**Question** : "Qu'est-ce qu'un agent superviseur dans LangGraph et quand architecture-t-on un système multi-agents avec superviseur plutôt qu'un seul agent ?"
+
+**Réponse** :
+
+Un **agent superviseur** est un nœud LLM central qui orchestre plusieurs agents spécialisés. Il reçoit la requête, décide quel sous-agent appeler, agrège les résultats, et décide quand la tâche est terminée.
+
+```
+Utilisateur
+    |
+    v
+[Superviseur LLM]  <---------+
+    |                         |
+    +---> [Agent Recherche]   | résultat
+    +---> [Agent Code]        | résultat
+    +---> [Agent Analyse]     | résultat
+    |                         |
+    +----> chaque agent renvoie au superviseur
+    |
+    v (FINISH)
+Réponse finale
+```
+
+```python
+members = ["researcher", "coder", "analyst"]
+
+def superviseur(state):
+    system = f"Tu orchestre : {members}. Réponds avec le nom de l'agent ou FINISH."
+    response = llm.invoke([SystemMessage(system)] + state["messages"])
+    return {"next": response.content}
+
+def router(state) -> str:
+    return END if state["next"] == "FINISH" else state["next"]
+
+graph.add_conditional_edges("supervisor", router)
+for member in members:
+    graph.add_edge(member, "supervisor")  # chaque agent renvoie au superviseur
+```
+
+**Quand utiliser** : tâches nécessitant des expertises distinctes (recherche + code + analyse), workflows conditionnels longs, sous-agents réutilisables indépendamment.
+
+---
+
+## XIII. Quelle différence entre MCP et les tools LangGraph ?
+
+**Question** : "Quelle est la différence entre le Model Context Protocol (MCP) et les tools natifs de LangGraph ? Quand utiliser l'un plutôt que l'autre ?"
+
+**Réponse** :
+
+**LangGraph Tools** sont des fonctions Python `@tool` bindées directement au LLM. Elles vivent dans le même processus que l'agent — rapides, simples, spécifiques à l'application.
+
+**MCP (Model Context Protocol)** est un protocole standardisé (JSON-RPC) qui permet à un LLM de communiquer avec des serveurs d'outils **externes et indépendants**. Un serveur MCP expose des tools, ressources et prompts via un contrat universel compatible avec n'importe quel LLM ou framework.
+
+```
+LangGraph Tools :              MCP :
++------------------+           +------------------+
+| Agent LangGraph  |           | Agent (Claude,   |
+| + tool_A()       |           | GPT, Gemini...)  |
+| + tool_B()       |           +--------+---------+
+| (in-process)     |                    | MCP Protocol
++------------------+           +--------+--------+--------+
+                               | MCP Server   | MCP Server|
+                               | (filesystem) | (GitHub)  |
+```
+
+| | LangGraph Tools | MCP |
+|---|---|---|
+| Portée | Application spécifique | Multi-frameworks, multi-LLMs |
+| Déploiement | In-process | Serveur externe indépendant |
+| Réutilisabilité | LangGraph uniquement | N'importe quel client MCP |
+| Cas d'usage | Logique métier custom | Intégrations système (FS, DB, APIs) |
+
+**En pratique** : MCP pour des intégrations système réutilisables partagées entre plusieurs agents (accès fichiers, GitHub, bases de données). LangGraph tools pour la logique métier propre à l'application.
